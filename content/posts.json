@@ -2,752 +2,752 @@
   {
     "day": 1,
     "topic": "AI/ML Foundations",
-    "title": "AI vs ML vs Deep Learning (in one mental model)",
+    "title": "🤖 AI vs ML vs Deep Learning (in one mental model)",
     "summary": "A simple mental model + examples to explain AI, ML, and Deep Learning clearly in interviews and in your projects.",
     "read_time": "2 min",
     "tags": ["AI", "ML", "DeepLearning", "Career"],
-    "hook": "Most people mix up AI, ML, and Deep Learning — and it shows in interviews.",
+    "hook": "🚨 Most people mix up AI, ML, and Deep Learning — and it shows in interviews.",
     "body": [
-      "AI is the umbrella: any system that shows “intelligent” behavior (rules, search, planning, ML).",
-      "ML is a subset of AI: models learn patterns from data instead of hand-written rules.",
-      "Deep Learning is a subset of ML: neural nets learn representations (often end-to-end) from lots of data/compute.",
-      "Use-case map: Rules (AI) → fraud checks; ML → churn prediction; DL → vision/LLMs/speech.",
-      "Interview tip: always mention data, objective, and evaluation metric (accuracy/F1/AUC, etc.)."
+      "🌐 AI is the umbrella: any system that shows 'intelligent' behavior (rules, search, planning, ML).",
+      "📊 ML is a subset of AI: models learn patterns from data instead of hand-written rules.",
+      "🧠 Deep Learning is a subset of ML: neural nets learn representations (often end-to-end) from lots of data/compute.",
+      "🗺️ Use-case map:\n   • Rules (AI) → fraud checks\n   • ML → churn prediction\n   • DL → vision/LLMs/speech",
+      "💡 Interview tip: always mention data, objective, and evaluation metric (accuracy/F1/AUC, etc.)."
     ],
-    "cta": "If you’re starting AI/ML, comment “ROADMAP” and I’ll share a beginner path I follow.",
+    "cta": "👇 If you're starting AI/ML, comment \"ROADMAP\" and I'll share a beginner path I follow.",
     "hashtags": ["ai", "machinelearning", "deeplearning", "datascience", "learning", "career"],
     "image_bullets": [
-      "AI = umbrella (rules, search, ML)",
-      "ML = learns from data",
-      "DL = neural nets (representation learning)",
-      "Examples + interview framing"
+      "🌐 AI = umbrella (rules, search, ML)",
+      "📊 ML = learns from data",
+      "🧠 DL = neural nets (representation learning)",
+      "💡 Examples + interview framing"
     ],
     "diagram_mermaid": "flowchart TD\n  A[AI: umbrella] --> B[Rules / Search / Planning]\n  A --> C[Machine Learning]\n  C --> D[Deep Learning]\n  B --> B1[If-else rules]\n  B --> B2[Graph search]\n  C --> C1[Regression/Classification]\n  C --> C2[Clustering]\n  D --> D1[CNNs]\n  D --> D2[Transformers/LLMs]\n"
   },
   {
     "day": 2,
     "topic": "AI/ML Foundations",
-    "title": "Supervised vs Unsupervised vs Reinforcement Learning",
+    "title": "🎯 Supervised vs Unsupervised vs Reinforcement Learning",
     "summary": "How to choose the learning paradigm and explain it with crisp real-world examples.",
     "read_time": "2 min",
     "tags": ["ML", "Interview", "Foundations"],
-    "hook": "Choosing the right ML paradigm is 80% of the solution clarity.",
+    "hook": "🔑 Choosing the right ML paradigm is 80% of the solution clarity.",
     "body": [
-      "Supervised learning: labeled data (x → y). Example: spam detection, price prediction.",
-      "Unsupervised learning: unlabeled data. Example: customer segmentation, anomaly discovery.",
-      "Reinforcement learning: agent learns by rewards in an environment. Example: robotics, games, dynamic pricing.",
-      "Rule of thumb: if you can define a target label reliably → supervised; if you need structure discovery → unsupervised; if actions affect future states → RL.",
-      "Always validate with data constraints: labels cost, drift, feedback loops, and latency requirements."
+      "✅ Supervised learning: labeled data (x → y).\n   • Example: spam detection, price prediction",
+      "🔍 Unsupervised learning: unlabeled data.\n   • Example: customer segmentation, anomaly discovery",
+      "🎮 Reinforcement learning: agent learns by rewards in an environment.\n   • Example: robotics, games, dynamic pricing",
+      "📌 Rule of thumb:\n   • Labels available → Supervised\n   • Need structure discovery → Unsupervised\n   • Actions affect future states → RL",
+      "⚠️ Always validate with data constraints: labels cost, drift, feedback loops, and latency requirements."
     ],
-    "cta": "Which one are you working on right now: supervised, unsupervised, or RL?",
+    "cta": "💬 Which one are you working on right now: supervised, unsupervised, or RL?",
     "hashtags": ["machinelearning", "supervisedlearning", "unsupervisedlearning", "reinforcementlearning", "ai", "datascience"],
     "image_bullets": [
-      "Supervised: labeled (x→y)",
-      "Unsupervised: discover structure",
-      "RL: actions + rewards",
-      "How to choose quickly"
+      "✅ Supervised: labeled (x→y)",
+      "🔍 Unsupervised: discover structure",
+      "🎮 RL: actions + rewards",
+      "📌 How to choose quickly"
     ],
     "diagram_mermaid": "flowchart TD\n  Q{Do you have labels?} -->|Yes| S[Supervised]\n  Q -->|No| U{Are actions involved?}\n  U -->|No| US[Unsupervised]\n  U -->|Yes| RL[Reinforcement Learning]\n  S --> S1[Classification / Regression]\n  US --> US1[Clustering / Anomaly]\n  RL --> RL1[Policy learns from rewards]\n"
   },
   {
     "day": 3,
     "topic": "AI/ML Foundations",
-    "title": "Overfitting vs Underfitting (and how to fix each)",
+    "title": "📉 Overfitting vs Underfitting (and how to fix each)",
     "summary": "A practical checklist for diagnosing model performance gaps and applying the right fix.",
     "read_time": "3 min",
     "tags": ["ML", "Modeling", "Basics"],
-    "hook": "If your train score is great but test score is bad, your model isn’t “smart” — it’s memorizing.",
+    "hook": "🚨 If your train score is great but test score is bad, your model isn't 'smart' — it's memorizing.",
     "body": [
-      "Underfitting = model too simple or not trained enough: both train and test performance are poor.",
-      "Overfitting = model too complex or data too small/noisy: train performance high, test performance drops.",
-      "Fix underfitting: add features, increase model capacity, train longer, reduce regularization.",
-      "Fix overfitting: more data, stronger regularization, simpler model, early stopping, data augmentation, better validation splits.",
-      "Best habit: track learning curves (train vs validation) before changing algorithms."
+      "📉 Underfitting = model too simple or not trained enough:\n   • Both train AND test performance are poor\n   • Model hasn't learned the underlying pattern",
+      "📈 Overfitting = model too complex or data too small/noisy:\n   • Train performance high, test performance drops\n   • Model memorized noise, not signal",
+      "🔧 Fix underfitting:\n   • Add more features\n   • Increase model capacity\n   • Train longer\n   • Reduce regularization",
+      "🔧 Fix overfitting:\n   • Collect more data\n   • Apply stronger regularization\n   • Use a simpler model\n   • Early stopping + data augmentation\n   • Use better validation splits",
+      "📊 Best habit: track learning curves (train vs validation) before changing algorithms."
     ],
-    "cta": "Want a learning-curve template in Python? Comment “CURVE”.",
+    "cta": "💬 Want a learning-curve template in Python? Comment \"CURVE\".",
     "hashtags": ["machinelearning", "datascience", "modeling", "overfitting", "underfitting", "python"],
     "image_bullets": [
-      "Underfitting: train↓ val↓",
-      "Overfitting: train↑ val↓",
-      "Fixes checklist",
-      "Use learning curves"
+      "📉 Underfitting: train↓ val↓",
+      "📈 Overfitting: train↑ val↓",
+      "🔧 Fixes checklist",
+      "📊 Use learning curves"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Start] --> B[Check train vs val]\n  B -->|Train low, Val low| U[Underfitting]\n  B -->|Train high, Val low| O[Overfitting]\n  U --> U1[More features]\n  U --> U2[More capacity / train longer]\n  O --> O1[More data]\n  O --> O2[Regularization / early stop]\n  O --> O3[Simpler model]\n"
   },
   {
     "day": 4,
     "topic": "AI/ML Foundations",
-    "title": "Confusion Matrix: the 5-minute interview answer",
+    "title": "📊 Confusion Matrix: the 5-minute interview answer",
     "summary": "Turn accuracy into a real evaluation story using precision, recall, F1, and trade-offs.",
     "read_time": "3 min",
     "tags": ["ML", "Metrics", "Interview"],
-    "hook": "Accuracy is a trap when classes are imbalanced.",
+    "hook": "⚠️ Accuracy is a trap when classes are imbalanced.",
     "body": [
-      "Confusion matrix gives you TP, FP, FN, TN — the raw story behind a classifier.",
-      "Precision = TP/(TP+FP): how many predicted positives were correct.",
-      "Recall = TP/(TP+FN): how many actual positives you captured.",
-      "F1 balances precision and recall; use it when both matter.",
-      "Business framing: fraud detection often cares about recall (catch fraud), but too many FP hurts user experience."
+      "🔢 Confusion matrix gives you TP, FP, FN, TN — the raw story behind a classifier:\n   • TP = correctly predicted positives\n   • FP = false alarms\n   • FN = missed positives\n   • TN = correctly predicted negatives",
+      "🎯 Precision = TP/(TP+FP): how many predicted positives were actually correct.",
+      "🔎 Recall = TP/(TP+FN): how many actual positives you captured.",
+      "⚖️ F1 balances precision and recall; use it when both matter equally.",
+      "💼 Business framing:\n   • Fraud detection → prioritize recall (catch all fraud)\n   • Recommendation → prioritize precision (don't spam users)\n   • Too many FPs hurts user experience"
     ],
-    "cta": "If you want, I can share a cheat-sheet for metrics by use-case.",
+    "cta": "📌 If you want, I can share a cheat-sheet for metrics by use-case.",
     "hashtags": ["machinelearning", "metrics", "datascience", "interviewprep", "python", "ml"],
     "image_bullets": [
-      "TP/FP/FN/TN",
-      "Precision vs Recall",
-      "F1 when both matter",
-      "Business trade-offs"
+      "🔢 TP/FP/FN/TN explained",
+      "🎯 Precision vs Recall",
+      "⚖️ F1 when both matter",
+      "💼 Business trade-offs"
     ],
     "diagram_mermaid": "flowchart LR\n  A[Predicted Positive] --> B[TP]\n  A --> C[FP]\n  D[Predicted Negative] --> E[TN]\n  D --> F[FN]\n  B --> P[Precision = TP/(TP+FP)]\n  B --> R[Recall = TP/(TP+FN)]\n"
   },
   {
     "day": 5,
     "topic": "AI/ML Foundations",
-    "title": "Data leakage: the silent killer of ML projects",
+    "title": "🕳️ Data leakage: the silent killer of ML projects",
     "summary": "What leakage looks like, why it happens, and how to prevent it with correct splitting and pipelines.",
     "read_time": "3 min",
     "tags": ["ML", "Data", "MLOps"],
-    "hook": "A model with 99% accuracy can still be useless in production.",
+    "hook": "🚨 A model with 99% accuracy can still be useless in production.",
     "body": [
-      "Data leakage happens when training sees information it wouldn’t have at prediction time.",
-      "Common leakage: using future information, global scaling before split, target-encoded features without CV, duplicates across splits.",
-      "Fix: split first, then fit preprocessing only on training data (pipelines).",
-      "For time series: use time-based splits (no shuffling).",
-      "Always sanity-check with a “leakage baseline”: can you predict the label using obviously-cheating features?"
+      "💧 Data leakage happens when training sees information it wouldn't have at prediction time.",
+      "⚠️ Common leakage sources:\n   • Using future information\n   • Global scaling before split\n   • Target-encoded features without CV\n   • Duplicates across train/test splits",
+      "✅ Fix: split first, then fit preprocessing ONLY on training data (use pipelines).",
+      "🕐 For time series: always use time-based splits — NEVER shuffle temporal data.",
+      "🔍 Sanity-check: build a 'leakage baseline' — can you predict the label using obviously-cheating features?"
     ],
-    "cta": "If you’ve faced leakage before, what caused it? I’m collecting real examples.",
+    "cta": "💬 If you've faced leakage before, what caused it? I'm collecting real examples.",
     "hashtags": ["machinelearning", "mlops", "dataleakage", "datascience", "python", "pipelines"],
     "image_bullets": [
-      "Leakage = future info",
-      "Split first, transform later",
-      "Time-series needs time split",
-      "Use pipelines"
+      "💧 Leakage = future info at train time",
+      "✅ Split first, transform later",
+      "🕐 Time-series needs time split",
+      "🔧 Use sklearn Pipelines"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Raw data] --> B{Split?}\n  B -->|Wrong| W[Preprocess on full data]\n  W --> WL[Leakage → inflated score]\n  B -->|Right| T[Train split]\n  B --> V[Val/Test split]\n  T --> P1[Fit preprocess]\n  P1 --> M[Train model]\n  P1 --> P2[Transform val/test]\n  P2 --> E[Evaluate]\n"
   },
   {
     "day": 6,
     "topic": "Python for ML",
-    "title": "Python data pipeline for ML: a clean structure",
+    "title": "🐍 Python data pipeline for ML: a clean structure",
     "summary": "A practical way to structure notebooks vs scripts so your ML work becomes reusable and production-ready.",
     "read_time": "3 min",
     "tags": ["Python", "MLOps", "DataEngineering"],
-    "hook": "If your ML project lives only in a notebook, scaling it will hurt.",
+    "hook": "⚠️ If your ML project lives only in a notebook, scaling it will hurt.",
     "body": [
-      "Keep exploration in notebooks, but move stable logic to modules (data loading, features, training).",
-      "Use config-driven runs: dataset path, seed, model params, output directory.",
-      "Persist artifacts: model, metrics JSON, plots, and data version references.",
-      "Make one function the entry point: train(config) → returns model + metrics.",
-      "You’ll thank yourself when you do ablations, CV, and deployment."
+      "📓 Keep exploration in notebooks, but move stable logic to modules:\n   • data.py → data loading\n   • features.py → feature engineering\n   • train.py → training loop",
+      "⚙️ Use config-driven runs:\n   • Dataset path\n   • Random seed\n   • Model hyperparameters\n   • Output directory",
+      "💾 Persist artifacts:\n   • model.pkl → trained model\n   • metrics.json → evaluation results\n   • plots/ → visualizations\n   • data version references",
+      "🎯 Make one function the entry point: train(config) → returns model + metrics.",
+      "🙏 You'll thank yourself when you run ablations, cross-validation, and deployment."
     ],
-    "cta": "Want a minimal repo template? I can share a structure I use for ML projects.",
+    "cta": "📌 Want a minimal repo template? I can share a structure I use for ML projects.",
     "hashtags": ["python", "machinelearning", "mlops", "dataengineering", "coding", "datascience"],
     "image_bullets": [
-      "Notebooks for exploration",
-      "Move logic to modules",
-      "Config-driven runs",
-      "Persist artifacts"
+      "📓 Notebooks for exploration only",
+      "🐍 Move logic to modules",
+      "⚙️ Config-driven runs",
+      "💾 Persist all artifacts"
     ],
     "diagram_mermaid": "flowchart TD\n  N[Notebook: explore] --> S[src/: reusable code]\n  S --> D[data.py]\n  S --> F[features.py]\n  S --> T[train.py]\n  T --> A[artifacts/]\n  A --> M[model.pkl]\n  A --> R[metrics.json]\n  A --> P[plots/]\n"
   },
   {
     "day": 7,
     "topic": "Python for ML",
-    "title": "NumPy mental models that make you faster",
+    "title": "⚡ NumPy mental models that make you faster",
     "summary": "Broadcasting, vectorization, and shapes — the 3 things that unlock speed and clarity.",
     "read_time": "2 min",
     "tags": ["Python", "NumPy", "ML"],
-    "hook": "Most NumPy bugs are shape bugs.",
+    "hook": "🐛 Most NumPy bugs are shape bugs.",
     "body": [
-      "Always think in shapes: (n,), (n,1), (n,d). Write them down while coding.",
-      "Vectorization beats Python loops: use matrix ops, boolean masks, and aggregation functions.",
-      "Broadcasting: dimensions of size 1 can expand to match the other operand — powerful but easy to misuse.",
-      "Use .reshape and keepdims=True intentionally to avoid accidental broadcasting.",
-      "Debug tip: print array.shape and use small toy arrays to validate logic."
+      "📐 Always think in shapes first:\n   • (n,) → 1D array\n   • (n,1) → column vector\n   • (n,d) → 2D matrix\n   • Write them down while coding!",
+      "⚡ Vectorization beats Python loops every time:\n   • Use matrix ops\n   • Boolean masks\n   • Aggregation functions (np.sum, np.mean)",
+      "📡 Broadcasting: dimensions of size 1 expand to match the other operand:\n   • Powerful but easy to misuse\n   • Understand the rules before relying on it",
+      "🔧 Use .reshape and keepdims=True intentionally to avoid accidental broadcasting.",
+      "🐞 Debug tip:\n   • Print array.shape constantly\n   • Use small toy arrays to validate logic before scaling"
     ],
-    "cta": "If you want, I’ll post a mini cheatsheet: reshape vs ravel vs squeeze.",
+    "cta": "📌 If you want, I'll post a mini cheatsheet: reshape vs ravel vs squeeze.",
     "hashtags": ["python", "numpy", "machinelearning", "datascience", "coding"],
     "image_bullets": [
-      "Shapes first",
-      "Vectorization > loops",
-      "Broadcasting rules",
-      "reshape/keepdims"
+      "📐 Shapes first — always",
+      "⚡ Vectorization > loops",
+      "📡 Broadcasting rules",
+      "🔧 reshape/keepdims intentionally"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Define shapes] --> B[Choose vectorized ops]\n  B --> C[Check broadcasting]\n  C --> D[Run on toy data]\n  D --> E[Scale to full data]\n"
   },
   {
     "day": 8,
     "topic": "R for Data",
-    "title": "R (tidyverse) for ML data work: 6 patterns that save hours",
+    "title": "📦 R (tidyverse) for ML data work: 6 patterns that save hours",
     "summary": "Core tidyverse patterns for cleaning + feature prep: joins, group_by, NA handling, and reproducible pipelines.",
     "read_time": "3 min",
     "tags": ["R", "Tidyverse", "Data", "ML"],
-    "hook": "R is still one of the fastest ways to go from raw data → clean features (especially with tidyverse).",
+    "hook": "💡 R is still one of the fastest ways to go from raw data → clean features (especially with tidyverse).",
     "body": [
-      "Joins with dplyr: left_join/inner_join and always check row counts after merges.",
-      "group_by + summarise: build features like counts, means, and time-based aggregates.",
-      "Missing values: use explicit NA logic (and consider missing-indicator features).",
-      "Dates: parse early (lubridate) and derive week/month/holiday-style features.",
-      "Categoricals: use factor levels intentionally to keep training/inference consistent.",
-      "Repro pipelines: keep data steps in one script (or targets/drake) instead of scattered cells."
+      "🔗 Joins with dplyr:\n   • left_join / inner_join for merging\n   • Always check row counts AFTER merges\n   • Unexpected row explosion = join bug",
+      "📊 group_by + summarise to build features:\n   • Counts, means, medians\n   • Time-based aggregates\n   • Rolling window stats",
+      "🕳️ Missing values:\n   • Use explicit NA logic\n   • Consider adding a missing-indicator feature\n   • Never silently drop NAs without understanding why",
+      "📅 Dates: parse early with lubridate and derive:\n   • Week / month / quarter\n   • Day of week\n   • Is-holiday flags",
+      "🏷️ Categoricals: use factor levels intentionally to keep training/inference consistent.",
+      "🔄 Repro pipelines: keep all data steps in one script (or targets/drake) — not scattered cells."
     ],
-    "cta": "If you want, I’ll share an R checklist I use before training any model (audit + leakage checks).",
+    "cta": "📌 If you want, I'll share an R checklist I use before training any model (audit + leakage checks).",
     "hashtags": ["rstats", "tidyverse", "datascience", "machinelearning", "dataengineering"],
     "image_bullets": [
-      "Joins + row-count checks",
-      "group_by + summarise features",
-      "NA + dates + factors",
-      "Repro data pipelines"
+      "🔗 Joins + row-count checks",
+      "📊 group_by + summarise features",
+      "🕳️ NA + dates + factors",
+      "🔄 Repro data pipelines"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Raw tables] --> B[Merge]\n  B --> C[Audit row counts]\n  C --> D[Handle missing]\n  D --> E[Feature engineering]\n  E --> F[Train-ready dataset]\n"
   },
   {
     "day": 9,
     "topic": "Python for ML",
-    "title": "Train/val/test split: what I do in real projects",
+    "title": "✂️ Train/val/test split: what I do in real projects",
     "summary": "A practical guide to splitting data (random, group, time) and keeping evaluation honest.",
     "read_time": "3 min",
     "tags": ["Python", "ML", "Evaluation"],
-    "hook": "Bad splitting can make a bad model look amazing.",
+    "hook": "⚠️ Bad splitting can make a bad model look amazing.",
     "body": [
-      "Random split is fine when data points are i.i.d (no grouping, no time order).",
-      "Group split when the same entity appears multiple times (users, devices, patients).",
-      "Time split for sequences (transactions, sensor logs): always predict the future from the past.",
-      "Keep a true holdout test set for final reporting (don’t tune on it).",
-      "Use seeds for reproducibility and log the exact split strategy."
+      "🎲 Random split: fine when data points are i.i.d:\n   • No grouping\n   • No time order\n   • Use sklearn's train_test_split with a seed",
+      "👥 Group split: when the same entity appears multiple times:\n   • Users, devices, patients\n   • Use GroupKFold or GroupShuffleSplit\n   • Same entity MUST NOT appear in both train and test",
+      "🕐 Time split: for sequential data:\n   • Transactions, sensor logs, prices\n   • Always predict the future from the past\n   • Never shuffle time-series data",
+      "🔒 Keep a TRUE holdout test set:\n   • For final reporting only\n   • Never tune hyperparameters on it\n   • Touch it exactly ONCE",
+      "📝 Use seeds for reproducibility and log the exact split strategy used."
     ],
-    "cta": "What kind of data do you work with most: i.i.d, grouped, or time-series?",
+    "cta": "💬 What kind of data do you work with most: i.i.d, grouped, or time-series?",
     "hashtags": ["machinelearning", "python", "evaluation", "datascience", "mlops"],
     "image_bullets": [
-      "Random vs Group vs Time split",
-      "Holdout test set",
-      "Don’t tune on test",
-      "Log split strategy"
+      "🎲 Random vs 👥 Group vs 🕐 Time split",
+      "🔒 Holdout test set is sacred",
+      "❌ Don't tune on test data",
+      "📝 Log split strategy always"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Dataset] --> B{Any groups?}\n  B -->|Yes| G[GroupSplit]\n  B -->|No| C{Time order matters?}\n  C -->|Yes| T[TimeSplit]\n  C -->|No| R[RandomSplit]\n  G --> H[Holdout test]\n  T --> H\n  R --> H\n"
   },
   {
     "day": 10,
     "topic": "Python for ML",
-    "title": "scikit-learn Pipelines: the best habit you can build",
+    "title": "🔧 scikit-learn Pipelines: the best habit you can build",
     "summary": "Pipelines prevent leakage, improve reproducibility, and make ML code deployable.",
     "read_time": "3 min",
     "tags": ["Python", "scikit-learn", "MLOps"],
-    "hook": "If you preprocess outside a Pipeline, you’re one step away from leakage.",
+    "hook": "🚨 If you preprocess outside a Pipeline, you're one step away from leakage.",
     "body": [
-      "Pipeline bundles preprocessing + model into one object: fit on train, transform everywhere.",
-      "It makes cross-validation correct by construction (each fold fits transforms separately).",
-      "You can persist the entire pipeline and serve it in production reliably.",
-      "Pair it with ColumnTransformer for mixed numeric/categorical features.",
-      "Bonus: GridSearchCV becomes cleaner and less error-prone."
+      "📦 Pipeline bundles preprocessing + model into ONE object:\n   • Fit on train\n   • Transform everywhere automatically\n   • No risk of fitting on test data",
+      "✅ It makes cross-validation correct by construction:\n   • Each fold fits transforms separately\n   • No leakage between folds",
+      "🚀 You can persist the entire pipeline and serve it reliably in production.",
+      "🗂️ Pair with ColumnTransformer for mixed feature types:\n   • Numeric columns → StandardScaler\n   • Categorical columns → OneHotEncoder\n   • All in one pipeline object",
+      "🎁 Bonus: GridSearchCV becomes cleaner, safer, and less error-prone."
     ],
-    "cta": "If you want, I’ll share a minimal Pipeline example (numeric + categorical + model).",
+    "cta": "📌 If you want, I'll share a minimal Pipeline example (numeric + categorical + model).",
     "hashtags": ["python", "scikitlearn", "mlops", "datascience", "machinelearning"],
     "image_bullets": [
-      "Pipelines prevent leakage",
-      "Correct CV by design",
-      "Deployable artifact",
-      "ColumnTransformer for mixed data"
+      "🔧 Pipelines prevent leakage",
+      "✅ Correct CV by design",
+      "🚀 Deployable artifact",
+      "🗂️ ColumnTransformer for mixed data"
     ],
     "diagram_mermaid": "flowchart LR\n  A[Train data] --> B[fit preprocess]\n  B --> C[train model]\n  A2[New data] --> D[transform (same preprocess)]\n  D --> E[predict]\n  B --> D\n"
   },
   {
     "day": 11,
     "topic": "RAG Basics",
-    "title": "RAG in one sentence (and why it works)",
-    "summary": "RAG = retrieval + generation. Here’s the intuition and when it beats fine-tuning.",
+    "title": "🔍 RAG in one sentence (and why it works)",
+    "summary": "RAG = retrieval + generation. Here's the intuition and when it beats fine-tuning.",
     "read_time": "2 min",
     "tags": ["RAG", "LLM", "NLP"],
-    "hook": "RAG is how you make LLMs answer from YOUR documents.",
+    "hook": "💡 RAG is how you make LLMs answer from YOUR documents.",
     "body": [
-      "RAG retrieves relevant context (documents/chunks) and feeds it to the LLM before generation.",
-      "It reduces hallucination by grounding answers in sources.",
-      "It’s cheaper and faster to update than fine-tuning: update the index, not the model.",
-      "RAG shines when knowledge changes frequently or must be auditable (citations).",
-      "Key idea: quality = retrieval quality + prompt quality + model capability."
+      "🔍 RAG retrieves relevant context (documents/chunks) and feeds it to the LLM before generation.",
+      "🛡️ It reduces hallucination by grounding answers in your actual sources.",
+      "💰 It's cheaper and faster to update than fine-tuning:\n   • Update the index, not the model\n   • No GPU training required\n   • Knowledge stays current",
+      "✅ RAG shines when:\n   • Knowledge changes frequently\n   • Answers must be auditable with citations\n   • You have domain-specific private data",
+      "🏆 Key formula:\n   Quality = Retrieval Quality + Prompt Quality + Model Capability"
     ],
-    "cta": "If you want, I’ll share a simple RAG architecture diagram and checklist.",
+    "cta": "📌 If you want, I'll share a simple RAG architecture diagram and checklist.",
     "hashtags": ["rag", "llm", "nlp", "ai", "genai", "machinelearning"],
     "image_bullets": [
-      "Retrieve context",
-      "Ground answers",
-      "Update index, not model",
-      "Quality = retrieval + prompt + model"
+      "🔍 Retrieve context",
+      "🛡️ Ground answers in sources",
+      "💰 Update index, not model",
+      "🏆 Quality = retrieval + prompt + model"
     ],
     "diagram_mermaid": "flowchart TD\n  U[User question] --> R[Retriever]\n  R --> V[Vector DB]\n  V --> C[Top-k chunks]\n  C --> P[Prompt builder]\n  P --> L[LLM]\n  L --> A[Answer + sources]\n"
   },
   {
     "day": 12,
     "topic": "RAG Basics",
-    "title": "Chunking strategy: the underrated part of RAG",
+    "title": "✂️ Chunking strategy: the underrated part of RAG",
     "summary": "Chunk size, overlap, and structure choices that directly change retrieval quality.",
     "read_time": "3 min",
     "tags": ["RAG", "Embeddings", "NLP"],
-    "hook": "Bad chunking creates bad retrieval, even with the best embedding model.",
+    "hook": "⚠️ Bad chunking creates bad retrieval, even with the best embedding model.",
     "body": [
-      "Chunk by meaning, not by fixed characters: headings, sections, bullet lists, tables.",
-      "Start with 300–800 tokens per chunk and 10–20% overlap (then tune).",
-      "Keep metadata: source URL, title, section heading, date, and permissions.",
-      "For code/docs: chunk by function/class boundaries; for policies: chunk by clause.",
-      "Measure retrieval: hit-rate@k, MRR, and user success metrics (not just “looks good”)."
+      "🧩 Chunk by MEANING, not by fixed characters:\n   • Headings and sections\n   • Bullet lists and tables\n   • Clause boundaries in legal text",
+      "📏 Start with 300–800 tokens per chunk:\n   • 10–20% overlap between chunks\n   • Then measure and tune\n   • Shorter = more precise; longer = more context",
+      "🏷️ Always keep metadata per chunk:\n   • Source URL and title\n   • Section heading\n   • Date and permissions",
+      "🗂️ Domain-specific rules:\n   • Code/docs → chunk by function/class boundaries\n   • Policies → chunk by clause\n   • Books → chunk by paragraph with section context",
+      "📊 Measure retrieval quality:\n   • hit-rate@k\n   • MRR (Mean Reciprocal Rank)\n   • User success metrics"
     ],
-    "cta": "If you share your doc type (PDFs, web pages, code), I can suggest chunking rules.",
+    "cta": "💬 If you share your doc type (PDFs, web pages, code), I can suggest chunking rules.",
     "hashtags": ["rag", "embeddings", "nlp", "genai", "ai", "machinelearning"],
     "image_bullets": [
-      "Chunk by meaning",
-      "Tune size + overlap",
-      "Store metadata",
-      "Measure retrieval quality"
+      "🧩 Chunk by meaning",
+      "📏 Tune size + overlap",
+      "🏷️ Store rich metadata",
+      "📊 Measure retrieval quality"
     ],
     "diagram_mermaid": "flowchart TD\n  D[Documents] --> S[Structure-aware splitter]\n  S --> K[Chunks + metadata]\n  K --> E[Embed]\n  E --> I[Index into Vector DB]\n"
   },
   {
     "day": 13,
     "topic": "RAG Basics",
-    "title": "Embeddings: what they are and how to think about them",
-    "summary": "Embeddings map text into vectors so “similar meaning” becomes “nearby in space”.",
+    "title": "🧬 Embeddings: what they are and how to think about them",
+    "summary": "Embeddings map text into vectors so 'similar meaning' becomes 'nearby in space'.",
     "read_time": "3 min",
     "tags": ["Embeddings", "RAG", "VectorDB"],
-    "hook": "RAG is basically: ‘search by meaning’ + ‘answer with citations’.",
+    "hook": "🔍 RAG is basically: 'search by meaning' + 'answer with citations'.",
     "body": [
-      "An embedding converts text into a dense vector (e.g., 768 dimensions).",
-      "Semantic similarity is often measured with cosine similarity (angle between vectors).",
-      "Good embeddings capture intent and context: “refund policy” ~ “return and reimbursement”.",
-      "Indexing needs trade-offs: recall vs latency vs cost (vector DB config matters).",
-      "If retrieval is off, evaluate embeddings + chunking + query rewriting."
+      "🧬 An embedding converts text into a dense vector:\n   • e.g., 768 or 1536 dimensions\n   • Similar meaning = nearby in vector space",
+      "📐 Semantic similarity is measured with cosine similarity:\n   • Angle between vectors\n   • 1.0 = identical meaning\n   • 0.0 = unrelated",
+      "🎯 Good embeddings capture intent and context:\n   • 'refund policy' ~ 'return and reimbursement'\n   • 'buy now' ~ 'purchase immediately'",
+      "⚖️ Indexing trade-offs to consider:\n   • Recall vs latency vs cost\n   • Exact search vs ANN (approximate nearest neighbor)\n   • Vector DB config matters a lot",
+      "🔧 If retrieval is off, evaluate in order:\n   • 1. Embedding model quality\n   • 2. Chunking strategy\n   • 3. Query rewriting"
     ],
-    "cta": "Want an embeddings + cosine similarity explanation with a tiny numeric example?",
+    "cta": "💬 Want an embeddings + cosine similarity explanation with a tiny numeric example?",
     "hashtags": ["embeddings", "rag", "vectordatabase", "nlp", "ai", "genai"],
     "image_bullets": [
-      "Text → vector",
-      "Cosine similarity",
-      "Search by meaning",
-      "Tune recall/latency/cost"
+      "🧬 Text → dense vector",
+      "📐 Cosine similarity",
+      "🎯 Search by meaning",
+      "⚖️ Tune recall/latency/cost"
     ],
     "diagram_mermaid": "flowchart LR\n  Q[Query] --> EQ[Embed query]\n  D[Chunks] --> ED[Embed chunks]\n  EQ --> S[Similarity search]\n  ED --> S\n  S --> K[Top-k chunks]\n"
   },
   {
     "day": 14,
     "topic": "RAG Basics",
-    "title": "RAG evaluation: what to measure (beyond vibes)",
+    "title": "📏 RAG evaluation: what to measure (beyond vibes)",
     "summary": "A practical evaluation stack for RAG: retrieval metrics, answer metrics, and end-user outcomes.",
     "read_time": "3 min",
     "tags": ["RAG", "Evaluation", "LLM"],
-    "hook": "If you can’t measure RAG quality, you can’t improve it.",
+    "hook": "📊 If you can't measure RAG quality, you can't improve it.",
     "body": [
-      "Retrieval metrics: hit-rate@k, MRR, and relevance judgment (human or weak labels).",
-      "Answer metrics: groundedness (uses retrieved sources), faithfulness, and completeness.",
-      "Latency + cost: measure tokens, vector search time, and total response time.",
-      "Test sets: build 50–200 real user questions with expected sources (start small).",
-      "Iterate systematically: chunking → embeddings → re-ranking → prompting → guardrails."
+      "🔍 Retrieval metrics:\n   • hit-rate@k — does the right chunk appear in top-k?\n   • MRR — how highly is the best chunk ranked?\n   • Relevance judgment (human or weak labels)",
+      "✅ Answer metrics:\n   • Groundedness — does the answer use retrieved sources?\n   • Faithfulness — no hallucinated facts?\n   • Completeness — was the question fully answered?",
+      "⚡ Latency + cost:\n   • Total tokens used\n   • Vector search time\n   • End-to-end response time",
+      "🧪 Build a test set:\n   • 50–200 real user questions\n   • With expected source documents\n   • Start small, grow over time",
+      "🔄 Iterate systematically:\n   Chunking → Embeddings → Re-ranking → Prompting → Guardrails"
     ],
-    "cta": "If you want, I’ll share a simple RAG eval spreadsheet format.",
+    "cta": "📌 If you want, I'll share a simple RAG eval spreadsheet format.",
     "hashtags": ["rag", "llm", "evaluation", "genai", "mlops", "ai"],
     "image_bullets": [
-      "Retrieval metrics",
-      "Grounded answers",
-      "Latency + cost",
-      "Small real test set"
+      "🔍 Retrieval metrics (hit-rate, MRR)",
+      "✅ Grounded + faithful answers",
+      "⚡ Latency + cost tracking",
+      "🧪 Small real test set first"
     ],
     "diagram_mermaid": "flowchart TD\n  A[User questions set] --> B[Run RAG]\n  B --> C[Log retrieval + answer]\n  C --> D[Retrieval metrics]\n  C --> E[Answer metrics]\n  C --> F[Latency/cost]\n  D --> G[Improve components]\n  E --> G\n  F --> G\n"
   },
   {
     "day": 15,
     "topic": "RAG Basics",
-    "title": "Re-ranking: the easiest RAG upgrade many skip",
+    "title": "🏆 Re-ranking: the easiest RAG upgrade many skip",
     "summary": "A 2-stage retrieval pipeline (retrieve → re-rank) can dramatically improve relevance.",
     "read_time": "3 min",
     "tags": ["RAG", "Search", "NLP"],
-    "hook": "Vector search gets you candidates. Re-ranking gets you the best answer context.",
+    "hook": "🎯 Vector search gets you candidates. Re-ranking gets you the best answer context.",
     "body": [
-      "Stage 1: fast retriever gets top-50 candidates (cheap).",
-      "Stage 2: re-ranker scores candidates with a stronger model (cross-encoder / LLM) and selects top-5.",
-      "This reduces ‘nearby but wrong’ chunks (common in dense retrieval).",
-      "It’s often a better ROI than switching embedding models.",
-      "Evaluate before/after with hit-rate@k and user satisfaction."
+      "⚡ Stage 1 — Fast Retriever:\n   • Get top-50 candidates\n   • Cheap and fast (ANN search)\n   • Optimized for recall",
+      "🎯 Stage 2 — Re-ranker:\n   • Score candidates with a stronger model\n   • Cross-encoder or LLM-based scoring\n   • Select the best top-5 for the prompt",
+      "🔧 This reduces 'nearby but wrong' chunks:\n   • Dense retrieval can surface semantically close but contextually wrong chunks\n   • Re-ranking catches these mistakes",
+      "💰 High ROI improvement:\n   • Often better ROI than switching embedding models\n   • Low cost relative to impact",
+      "📊 Evaluate before and after:\n   • hit-rate@k\n   • User satisfaction scores"
     ],
-    "cta": "If you’re building RAG, are you using re-ranking yet?",
+    "cta": "💬 If you're building RAG, are you using re-ranking yet?",
     "hashtags": ["rag", "informationretrieval", "nlp", "genai", "ai", "search"],
     "image_bullets": [
-      "Retrieve top-50 fast",
-      "Re-rank to top-5",
-      "Fix nearby-but-wrong",
-      "High ROI improvement"
+      "⚡ Retrieve top-50 fast",
+      "🎯 Re-rank to top-5",
+      "🔧 Fix nearby-but-wrong chunks",
+      "💰 High ROI improvement"
     ],
     "diagram_mermaid": "flowchart TD\n  Q[Query] --> R1[Retriever]\n  R1 --> C[Top-50 candidates]\n  C --> RR[Re-ranker]\n  RR --> K[Top-5 context]\n  K --> L[LLM answer]\n"
   },
   {
     "day": 16,
     "topic": "AI Agents",
-    "title": "What is an AI agent (without the hype)?",
+    "title": "🤖 What is an AI agent (without the hype)?",
     "summary": "An agent = LLM + tools + memory + a loop that plans and acts toward a goal.",
     "read_time": "3 min",
     "tags": ["Agents", "LLM", "Automation"],
-    "hook": "An LLM answers. An agent acts.",
+    "hook": "⚡ An LLM answers. An agent acts.",
     "body": [
-      "Agent core: goal → plan → tool calls → observe results → refine → finish.",
-      "Tools can be APIs, databases, search, code execution, or internal services.",
-      "Memory helps maintain context: short-term (conversation) and long-term (user/project facts).",
-      "Guardrails matter: tool permissions, safe browsing, and human-in-the-loop for risky actions.",
-      "Best starting use-cases: repetitive ops tasks, report generation, customer support triage."
+      "🔄 Agent core loop:\n   Goal → Plan → Tool calls → Observe results → Refine → Finish",
+      "🛠️ Tools can be:\n   • APIs and external services\n   • Database read/write\n   • Web search\n   • Code execution\n   • Internal business services",
+      "🧠 Memory helps maintain context:\n   • Short-term: current conversation + task state\n   • Long-term: user preferences + project facts",
+      "🛡️ Guardrails are non-negotiable:\n   • Tool permission allowlists\n   • Safe browsing constraints\n   • Human-in-the-loop for risky actions",
+      "🚀 Best starting use-cases:\n   • Repetitive ops tasks\n   • Report generation\n   • Customer support triage"
     ],
-    "cta": "If you want, I’ll share a minimal agent design pattern you can implement in Python.",
+    "cta": "📌 If you want, I'll share a minimal agent design pattern you can implement in Python.",
     "hashtags": ["aiagents", "automation", "llm", "genai", "python", "softwareengineering"],
     "image_bullets": [
-      "LLM answers; agent acts",
-      "Plan → tool → observe loop",
-      "Tools + memory",
-      "Guardrails required"
+      "⚡ LLM answers; agent acts",
+      "🔄 Plan → tool → observe loop",
+      "🛠️ Tools + 🧠 memory",
+      "🛡️ Guardrails required"
     ],
     "diagram_mermaid": "flowchart TD\n  G[Goal] --> P[Plan]\n  P --> T[Call tool]\n  T --> O[Observe]\n  O --> R{Done?}\n  R -->|No| P\n  R -->|Yes| F[Final output]\n"
   },
   {
     "day": 17,
     "topic": "AI Agents",
-    "title": "Tool calling: the ‘API layer’ of agents",
+    "title": "🛠️ Tool calling: the 'API layer' of agents",
     "summary": "How agents reliably use tools: schemas, retries, validation, and logging.",
     "read_time": "3 min",
     "tags": ["Agents", "Engineering", "LLM"],
-    "hook": "Agents fail in the same way software fails: bad inputs and missing validation.",
+    "hook": "🚨 Agents fail in the same way software fails: bad inputs and missing validation.",
     "body": [
-      "Define tool schemas clearly: required fields, types, and constraints.",
-      "Validate tool outputs: don’t trust external APIs blindly; check structure and errors.",
-      "Add retries + backoff for transient failures; make tools idempotent where possible.",
-      "Log everything: prompt, tool call, tool response, final answer (with redaction for secrets).",
-      "Design for fallbacks: if tool fails, return partial results + next steps."
+      "📋 Define tool schemas clearly:\n   • Required fields and types\n   • Value constraints and ranges\n   • Clear descriptions the LLM can understand",
+      "✅ Validate tool outputs:\n   • Don't trust external APIs blindly\n   • Check response structure\n   • Handle partial failures gracefully",
+      "🔁 Add retries + backoff:\n   • Transient failures happen (network, rate limits)\n   • Make tools idempotent where possible\n   • Cap maximum retry attempts",
+      "📝 Log everything:\n   • Prompt sent\n   • Tool call made\n   • Tool response received\n   • Final answer generated\n   • Redact secrets and PII in logs",
+      "🛡️ Design for fallbacks:\n   • If tool fails → return partial results\n   • Provide clear next steps\n   • Never leave the agent in a silent broken state"
     ],
-    "cta": "If you’re building agents, what tool failures do you see most often?",
+    "cta": "💬 If you're building agents, what tool failures do you see most often?",
     "hashtags": ["aiagents", "llm", "softwareengineering", "automation", "mlops", "genai"],
     "image_bullets": [
-      "Schema + validation",
-      "Retries/backoff",
-      "Logging + redaction",
-      "Fallback paths"
+      "📋 Schema + validation",
+      "🔁 Retries / backoff",
+      "📝 Logging + redaction",
+      "🛡️ Fallback paths"
     ],
     "diagram_mermaid": "flowchart TD\n  A[LLM decides tool call] --> V[Validate inputs]\n  V --> C[Call tool]\n  C --> O{Tool ok?}\n  O -->|No| R[Retry/backoff]\n  R --> C\n  O -->|Yes| P[Post-validate output]\n  P --> F[Compose final answer]\n"
   },
   {
     "day": 18,
     "topic": "AI Automation",
-    "title": "AI automation checklist before you ship",
+    "title": "✅ AI automation checklist before you ship",
     "summary": "A pragmatic checklist: reliability, safety, monitoring, and ROI.",
     "read_time": "3 min",
     "tags": ["Automation", "Agents", "MLOps"],
-    "hook": "Automation isn’t ‘cool’. It must be reliable.",
+    "hook": "🚨 Automation isn't 'cool'. It must be reliable.",
     "body": [
-      "Define success: time saved, error reduction, cost per run, and user satisfaction.",
-      "Create a fallback: when confidence is low, ask a human or route to a safer path.",
-      "Add guardrails: allowlist tools, limit permissions, and restrict external actions.",
-      "Monitor: failure rate, latency, token spend, tool error types, and drift in prompts/data.",
-      "Test with real cases: 30–100 scenarios beats 1 demo every time."
+      "📊 Define success metrics upfront:\n   • Time saved per run\n   • Error reduction rate\n   • Cost per automated run\n   • User satisfaction score",
+      "🛡️ Create a fallback for every path:\n   • When confidence is low → ask a human\n   • When tools fail → route to a safer path\n   • Never silently fail",
+      "🔒 Add guardrails:\n   • Allowlist permitted tools\n   • Limit external permissions\n   • Restrict destructive actions",
+      "📡 Monitor continuously:\n   • Failure rate and error types\n   • Response latency\n   • Token spend\n   • Prompt drift and data drift",
+      "🧪 Test with real scenarios:\n   • 30–100 diverse cases beats 1 demo\n   • Include edge cases and adversarial inputs\n   • Test failure recovery paths too"
     ],
-    "cta": "If you want, I can convert your workflow into an automation plan with milestones.",
+    "cta": "📌 If you want, I can convert your workflow into an automation plan with milestones.",
     "hashtags": ["automation", "ai", "mlops", "aiagents", "productivity", "softwareengineering"],
     "image_bullets": [
-      "Define ROI metrics",
-      "Fallback to human",
-      "Guardrails + allowlists",
-      "Monitor failures + spend"
+      "📊 Define ROI metrics first",
+      "🛡️ Fallback to human",
+      "🔒 Guardrails + allowlists",
+      "📡 Monitor failures + spend"
     ],
     "diagram_mermaid": "flowchart TD\n  W[Workflow] --> M[Define metrics]\n  M --> D[Design fallback]\n  D --> G[Guardrails]\n  G --> T[Test scenarios]\n  T --> S[Ship]\n  S --> O[Observe/monitor]\n  O --> I[Iterate]\n"
   },
   {
     "day": 19,
     "topic": "AI Agents",
-    "title": "Memory in agents: what to store (and what not to)",
+    "title": "🧠 Memory in agents: what to store (and what not to)",
     "summary": "A simple approach to agent memory that avoids privacy risk and improves performance.",
     "read_time": "3 min",
     "tags": ["Agents", "RAG", "Privacy"],
-    "hook": "Storing everything is not memory — it’s a liability.",
+    "hook": "⚠️ Storing everything is not memory — it's a liability.",
     "body": [
-      "Short-term memory: current task context (recent messages, intermediate results).",
-      "Long-term memory: stable user preferences, project facts, and reusable decisions.",
-      "Don’t store secrets or raw PII; store pointers/refs and redacted summaries.",
-      "Use retrieval memory: save chunks with metadata and retrieve by query (like RAG for conversations).",
-      "Expire memory: TTL and “forget” actions are product features, not afterthoughts."
+      "⏱️ Short-term memory — current task context:\n   • Recent messages in conversation\n   • Intermediate tool results\n   • Active task state",
+      "🗄️ Long-term memory — stable and reusable:\n   • User preferences\n   • Project facts\n   • Reusable decisions and outcomes",
+      "🔒 What NOT to store:\n   • Secrets or credentials\n   • Raw PII\n   • Store pointers/refs and redacted summaries instead",
+      "🔍 Use retrieval memory (RAG-like approach):\n   • Save summaries as chunks with metadata\n   • Retrieve by semantic query when needed\n   • Context-aware instead of always-loaded",
+      "⏰ Expire memory intentionally:\n   • TTL (time-to-live) policies\n   • 'Forget' actions as a first-class feature\n   • Not an afterthought — a product requirement"
     ],
-    "cta": "If you’re building agents, are you storing memory as text, vectors, or both?",
+    "cta": "💬 If you're building agents, are you storing memory as text, vectors, or both?",
     "hashtags": ["aiagents", "rag", "privacy", "security", "genai", "softwareengineering"],
     "image_bullets": [
-      "Short-term vs long-term",
-      "Don’t store secrets/PII",
-      "Retrieval memory (RAG-like)",
-      "TTL + forget features"
+      "⏱️ Short-term vs 🗄️ long-term memory",
+      "🔒 Don't store secrets/PII",
+      "🔍 Retrieval memory (RAG-like)",
+      "⏰ TTL + forget features"
     ],
     "diagram_mermaid": "flowchart TD\n  U[User] --> A[Agent]\n  A --> STM[Short-term context]\n  A -->|write summary| LTM[(Long-term store)]\n  A -->|retrieve| LTM\n  LTM --> R[Relevant memories]\n  R --> A\n"
   },
   {
     "day": 20,
     "topic": "AI Agents",
-    "title": "Multi-agent vs single-agent: when to split",
+    "title": "🏗️ Multi-agent vs single-agent: when to split",
     "summary": "How to decide between one capable agent and multiple specialized agents (and the trade-offs).",
     "read_time": "3 min",
     "tags": ["Agents", "Architecture", "Engineering"],
-    "hook": "More agents ≠ better system. Sometimes it’s just more failure modes.",
+    "hook": "⚠️ More agents ≠ better system. Sometimes it's just more failure modes.",
     "body": [
-      "Start single-agent: simpler, easier to debug, lower coordination overhead.",
-      "Split when tasks have different skills/tools (research vs coding vs execution) or different permission levels.",
-      "Add an orchestrator: routes sub-tasks, merges outputs, enforces constraints.",
-      "Watch failure modes: deadlocks, duplicated work, conflicting outputs.",
-      "Keep shared state minimal and explicit (task spec, artifacts, and acceptance checks)."
+      "🎯 Start single-agent:\n   • Simpler to build and debug\n   • Lower coordination overhead\n   • Easier to trace failures",
+      "✂️ Split into multiple agents when:\n   • Tasks need different skills/tools (research vs coding vs execution)\n   • Different permission levels are required\n   • Parallelism genuinely speeds things up",
+      "🎛️ Add an orchestrator agent:\n   • Routes sub-tasks to specialists\n   • Merges and validates outputs\n   • Enforces constraints and acceptance criteria",
+      "⚠️ Watch for multi-agent failure modes:\n   • Deadlocks between agents\n   • Duplicated work\n   • Conflicting outputs\n   • Silent handoff failures",
+      "📋 Keep shared state minimal and explicit:\n   • Task specification\n   • Output artifacts\n   • Acceptance checks"
     ],
-    "cta": "If you’ve tried multi-agent, what coordination problem did you hit first?",
+    "cta": "💬 If you've tried multi-agent, what coordination problem did you hit first?",
     "hashtags": ["aiagents", "architecture", "softwareengineering", "genai", "automation"],
     "image_bullets": [
-      "Start single-agent",
-      "Split by skills/tools/permissions",
-      "Use an orchestrator",
-      "Avoid coordination failures"
+      "🎯 Start single-agent",
+      "✂️ Split by skills/tools/permissions",
+      "🎛️ Use an orchestrator",
+      "⚠️ Avoid coordination failures"
     ],
     "diagram_mermaid": "flowchart TD\n  O[Orchestrator] --> R[Research agent]\n  O --> C[Coding agent]\n  O --> X[Execution agent]\n  R --> O\n  C --> O\n  X --> O\n  O --> F[Final delivery]\n"
   },
   {
     "day": 21,
     "topic": "DSA (Interview)",
-    "title": "Big-O: the only explanation you need to remember",
+    "title": "📈 Big-O: the only explanation you need to remember",
     "summary": "How to explain time/space complexity in interviews using growth rate intuition.",
     "read_time": "3 min",
     "tags": ["DSA", "Interview", "Python"],
-    "hook": "Big-O is not about speed. It’s about how your solution scales.",
+    "hook": "💡 Big-O is not about speed. It's about how your solution scales.",
     "body": [
-      "Big-O describes the growth of runtime as input size n increases (dominant term).",
-      "Common: O(1), O(log n), O(n), O(n log n), O(n^2).",
-      "Rules: loops → multiply, sequential blocks → add, log n often from halving/binary search.",
-      "Always mention space complexity too (especially for recursion and hash maps).",
-      "Interview hack: start with a brute-force solution, then optimize and explain the trade-off."
+      "📈 Big-O describes the growth of runtime as input size n increases:\n   • Always express using the dominant term\n   • Drop constants and lower-order terms",
+      "📊 Common complexities to know:\n   • O(1) → constant (hash map lookup)\n   • O(log n) → logarithmic (binary search)\n   • O(n) → linear (single loop)\n   • O(n log n) → linearithmic (merge sort)\n   • O(n²) → quadratic (nested loops)",
+      "🔢 Rules for analysis:\n   • Sequential blocks → ADD complexities\n   • Nested loops → MULTIPLY complexities\n   • Halving/binary search → log n",
+      "💾 Always mention space complexity too:\n   • Recursion stacks use O(depth) space\n   • Hash maps use O(n) space\n   • In-place operations save space",
+      "🎯 Interview hack:\n   1. Start with brute-force solution\n   2. State its Big-O\n   3. Find the bottleneck\n   4. Optimize and explain trade-off"
     ],
-    "cta": "Want a Big-O practice sheet with 15 common patterns? Comment “BIG-O”.",
+    "cta": "💬 Want a Big-O practice sheet with 15 common patterns? Comment \"BIG-O\".",
     "hashtags": ["dsa", "interviewprep", "python", "algorithms", "computerscience"],
     "image_bullets": [
-      "Big-O = scaling",
-      "Dominant term",
-      "Loop rules",
-      "Brute force → optimize"
+      "📈 Big-O = how it scales",
+      "📊 Dominant term only",
+      "🔢 Loop rules (add vs multiply)",
+      "🎯 Brute force → optimize"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Problem] --> B[Brute force]\n  B --> C[Analyze Big-O]\n  C --> D[Find bottleneck]\n  D --> E[Optimize with pattern]\n  E --> F[Explain trade-offs]\n"
   },
   {
     "day": 22,
     "topic": "DSA (Interview)",
-    "title": "HashMap pattern: the fastest way to improve a solution",
+    "title": "🗂️ HashMap pattern: the fastest way to improve a solution",
     "summary": "Turn nested loops into O(n) with a HashMap — and explain it cleanly.",
     "read_time": "3 min",
     "tags": ["DSA", "HashMap", "Interview"],
-    "hook": "If you see ‘find pair’, ‘count’, or ‘seen before’, think HashMap.",
+    "hook": "💡 If you see 'find pair', 'count', or 'seen before' — think HashMap.",
     "body": [
-      "HashMap helps store seen elements / frequencies / indices for O(1) average lookup.",
-      "Classic problems: Two Sum, anagrams, longest substring without repeat, frequency counts.",
-      "Trade-off: more space to reduce time (time-space trade-off).",
-      "In interviews: describe what the map stores and when it updates.",
-      "Edge cases: duplicates, negative numbers, and initialization (0 vs 1 indexing)."
+      "🗂️ HashMap helps store and retrieve in O(1) average:\n   • Seen elements\n   • Frequencies / counts\n   • Indices of elements",
+      "🎯 Classic HashMap problems:\n   • Two Sum\n   • Anagram detection\n   • Longest substring without repeat\n   • Frequency counts and mode",
+      "⚖️ Time-space trade-off:\n   • You trade O(n) more space\n   • To reduce time from O(n²) → O(n)\n   • Almost always worth it",
+      "🗣️ In interviews, always explain:\n   • What the map stores\n   • When the map updates\n   • What invariant the map maintains",
+      "⚠️ Edge cases to handle:\n   • Duplicate values\n   • Negative numbers\n   • Initialization (0 vs 1 indexing)"
     ],
-    "cta": "If you want, I’ll post a “HashMap patterns” list with example problems.",
+    "cta": "📌 If you want, I'll post a 'HashMap patterns' list with example problems.",
     "hashtags": ["dsa", "algorithms", "interviewprep", "python", "coding"],
     "image_bullets": [
-      "Store seen/freq/index",
-      "O(1) average lookup",
-      "Time-space trade-off",
-      "Explain map invariant"
+      "🗂️ Store seen/freq/index",
+      "⚡ O(1) average lookup",
+      "⚖️ Time-space trade-off",
+      "🗣️ Explain map invariant"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Iterate elements] --> B{Key in map?}\n  B -->|Yes| C[Use stored info]\n  B -->|No| D[Store/update]\n  C --> E[Return/continue]\n  D --> A\n"
   },
   {
     "day": 23,
     "topic": "DSA (Interview)",
-    "title": "Two pointers: the pattern behind many ‘easy’ solutions",
+    "title": "👆👆 Two pointers: the pattern behind many 'easy' solutions",
     "summary": "How to spot two-pointer opportunities and explain the invariant.",
     "read_time": "3 min",
     "tags": ["DSA", "TwoPointers", "Interview"],
-    "hook": "If your data is sorted (or can be sorted), two pointers might be the optimal move.",
+    "hook": "💡 If your data is sorted (or can be sorted), two pointers might be the optimal move.",
     "body": [
-      "Use two pointers to reduce nested loops: left/right, slow/fast, window boundaries.",
-      "Common: pair sum in sorted array, remove duplicates, palindromes, container with most water.",
-      "Invariant = what remains true as pointers move (e.g., window contains unique chars).",
-      "Sorting can enable two pointers but adds O(n log n). Mention the trade-off.",
-      "Be explicit about pointer moves: why left++ vs right--."
+      "🎯 Use two pointers to reduce nested loops:\n   • Left/right pointers from both ends\n   • Slow/fast pointers for cycle detection\n   • Window boundary pointers",
+      "📚 Common two-pointer problems:\n   • Pair sum in sorted array\n   • Remove duplicates in-place\n   • Palindrome check\n   • Container with most water",
+      "📌 Always define the invariant:\n   • What remains TRUE as pointers move?\n   • e.g., 'window contains only unique characters'\n   • Invariant = your proof of correctness",
+      "⚖️ Sorting can enable two pointers:\n   • Adds O(n log n) to complexity\n   • But may enable O(n) pointer phase\n   • Always mention this trade-off",
+      "🗣️ In interviews, be explicit:\n   • Why do you move left++?\n   • Why do you move right--?\n   • What condition triggers each move?"
     ],
-    "cta": "Want a ‘two pointers’ problem set with difficulty progression?",
+    "cta": "💬 Want a 'two pointers' problem set with difficulty progression?",
     "hashtags": ["dsa", "interviewprep", "algorithms", "python", "coding"],
     "image_bullets": [
-      "Sorted → two pointers",
-      "Left/right or slow/fast",
-      "State invariant",
-      "Explain pointer moves"
+      "🔡 Sorted → two pointers",
+      "👆👆 Left/right or slow/fast",
+      "📌 State the invariant",
+      "🗣️ Explain pointer moves"
     ],
     "diagram_mermaid": "flowchart LR\n  L[Left pointer] --> M[Check condition]\n  R[Right pointer] --> M\n  M -->|Need smaller| R2[Move right--]\n  M -->|Need bigger| L2[Move left++]\n  R2 --> M\n  L2 --> M\n"
   },
   {
     "day": 24,
     "topic": "DSA (Interview)",
-    "title": "Sliding window: from O(n²) to O(n)",
+    "title": "🪟 Sliding window: from O(n²) to O(n)",
     "summary": "A mental model for fixed and variable windows with real interview examples.",
     "read_time": "3 min",
     "tags": ["DSA", "SlidingWindow", "Interview"],
-    "hook": "If the question says ‘subarray’ or ‘substring’, sliding window is shouting.",
+    "hook": "💡 If the question says 'subarray' or 'substring', sliding window is shouting.",
     "body": [
-      "Fixed window: window size k stays constant (max sum of k elements).",
-      "Variable window: expand right pointer, shrink left to satisfy constraint (unique chars, sum ≤ target).",
-      "Maintain state incrementally (counts, sum, max/min) instead of recomputing.",
-      "Be careful with constraints that break monotonicity (negative numbers can complicate).",
-      "Explain what your window state represents at every step."
+      "📏 Fixed window — size k stays constant:\n   • Max/min sum of k elements\n   • Average of k elements\n   • Slide the window, update state incrementally",
+      "🔄 Variable window — expand and shrink:\n   • Expand right pointer to find valid window\n   • Shrink left pointer when constraint breaks\n   • Example: longest substring with unique chars, sum ≤ target",
+      "⚡ Maintain state incrementally:\n   • Counts, sums, max/min\n   • NEVER recompute from scratch each step\n   • Add new element, remove old element",
+      "⚠️ Watch out for:\n   • Negative numbers (can complicate monotonicity)\n   • Off-by-one errors in window bounds\n   • Empty window edge cases",
+      "🗣️ Explain what your window state represents at every step."
     ],
-    "cta": "I can share 10 sliding window problems with ‘state’ hints if you want.",
+    "cta": "📌 I can share 10 sliding window problems with 'state' hints if you want.",
     "hashtags": ["dsa", "slidingwindow", "interviewprep", "python", "algorithms"],
     "image_bullets": [
-      "Subarray/substring hint",
-      "Fixed vs variable window",
-      "Maintain state incrementally",
-      "Watch negative numbers"
+      "💡 Subarray/substring → sliding window",
+      "📏 Fixed vs variable window",
+      "⚡ Maintain state incrementally",
+      "⚠️ Watch negative numbers"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Expand right] --> B[Update state]\n  B --> C{Constraint ok?}\n  C -->|Yes| D[Update answer]\n  C -->|No| E[Shrink left]\n  E --> B\n  D --> A\n"
   },
   {
     "day": 25,
     "topic": "DSA (Interview)",
-    "title": "Binary search: not just for sorted arrays",
+    "title": "🔎 Binary search: not just for sorted arrays",
     "summary": "Binary search on answers (monotonic property) is a game-changer for medium problems.",
     "read_time": "3 min",
     "tags": ["DSA", "BinarySearch", "Interview"],
-    "hook": "Binary search is a technique for monotonic truth — not only sorted arrays.",
+    "hook": "💡 Binary search is a technique for monotonic truth — not only sorted arrays.",
     "body": [
-      "Classic: search a value in sorted array → O(log n).",
-      "Binary search on answer: find minimum/maximum feasible value using a predicate check(mid).",
-      "Works when predicate is monotonic (true then always true, or false then always false).",
-      "Examples: minimum speed to finish tasks, capacity to ship packages, allocate pages.",
-      "Interview framing: define predicate, bounds, and why monotonicity holds."
+      "🔎 Classic binary search:\n   • Search a value in a sorted array\n   • O(log n) — halve the search space each step\n   • Know your boundary: lo, hi, mid = lo + (hi - lo) // 2",
+      "🎯 Binary search on answer:\n   • Find the minimum/maximum feasible value\n   • Define a predicate: check(mid) → True or False\n   • Binary search over the answer space",
+      "📐 Works ONLY when predicate is monotonic:\n   • True then always True (or False then always False)\n   • Example: 'can we ship all packages in mid days?'",
+      "📚 Common examples:\n   • Minimum speed to finish tasks\n   • Capacity to ship packages within D days\n   • Allocate minimum pages\n   • Koko eating bananas",
+      "🗣️ Interview framing:\n   1. Define the predicate check(mid)\n   2. State the bounds (lo, hi)\n   3. Explain WHY monotonicity holds"
     ],
-    "cta": "Want a list of ‘binary search on answer’ problems with predicate templates?",
+    "cta": "💬 Want a list of 'binary search on answer' problems with predicate templates?",
     "hashtags": ["dsa", "binarysearch", "interviewprep", "algorithms", "python"],
     "image_bullets": [
-      "Monotonic predicate",
-      "Binary search on answer",
-      "Define bounds + check(mid)",
-      "Explain monotonicity"
+      "📐 Monotonic predicate required",
+      "🎯 Binary search on answer space",
+      "🔎 Define bounds + check(mid)",
+      "🗣️ Explain monotonicity"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Define bounds lo..hi] --> B[mid=(lo+hi)/2]\n  B --> C{check(mid)}\n  C -->|feasible| D[hi=mid]\n  C -->|not feasible| E[lo=mid+1]\n  D --> B\n  E --> B\n"
   },
   {
     "day": 26,
     "topic": "Projects",
-    "title": "Build a mini RAG chatbot project (the clean roadmap)",
+    "title": "🏗️ Build a mini RAG chatbot project (the clean roadmap)",
     "summary": "A practical roadmap: data → chunking → embeddings → retrieval → eval → UI.",
     "read_time": "4 min",
     "tags": ["Project", "RAG", "Python"],
-    "hook": "If you want one portfolio project in 2026: build a RAG app with evaluation.",
+    "hook": "🚀 If you want one portfolio project in 2026: build a RAG app with evaluation.",
     "body": [
-      "Pick a domain: your notes, a public handbook, docs of a library, or company policies.",
-      "Ingest + clean: extract text, remove noise, keep metadata (source/section/date).",
-      "Chunking + embeddings: tune for your doc type; index in a vector DB.",
-      "Retrieval: top-k + (optional) re-ranking; then prompt the LLM with citations.",
-      "Evaluation: build a small question set and track retrieval + answer quality."
+      "🎯 Step 1 — Pick a domain:\n   • Your own notes or documents\n   • A public handbook or wiki\n   • Docs of a popular open-source library\n   • Company or product policies",
+      "🧹 Step 2 — Ingest + clean:\n   • Extract clean text from PDFs/HTML/markdown\n   • Remove boilerplate and noise\n   • Keep metadata: source, section, date",
+      "✂️ Step 3 — Chunking + embeddings:\n   • Tune chunk size for your doc type\n   • Embed with a strong embedding model\n   • Index in a vector DB (Chroma, Pinecone, Qdrant)",
+      "🔍 Step 4 — Retrieval + generation:\n   • Top-k retrieval + optional re-ranking\n   • Prompt the LLM with retrieved chunks\n   • Always include citations in the answer",
+      "📊 Step 5 — Evaluation:\n   • Build 50+ representative questions\n   • Track retrieval quality + answer quality\n   • Iterate on the weakest component"
     ],
-    "cta": "If you want, I can outline a repo structure and MVP milestones for your RAG app.",
+    "cta": "📌 If you want, I can outline a repo structure and MVP milestones for your RAG app.",
     "hashtags": ["rag", "python", "genai", "portfolio", "machinelearning", "mlops"],
     "image_bullets": [
-      "Domain selection",
-      "Ingest + metadata",
-      "Chunk + embed + index",
-      "Retrieve + cite + eval"
+      "🎯 Domain selection",
+      "🧹 Ingest + metadata",
+      "✂️ Chunk + embed + index",
+      "🔍 Retrieve + cite + eval"
     ],
     "diagram_mermaid": "flowchart TD\n  D[Docs] --> I[Ingest + clean]\n  I --> S[Split into chunks]\n  S --> E[Embeddings]\n  E --> V[Vector DB]\n  Q[Question] --> R[Retrieve + re-rank]\n  V --> R\n  R --> P[Prompt with citations]\n  P --> L[LLM]\n  L --> A[Answer]\n  A --> EV[Evaluate + iterate]\n"
   },
   {
     "day": 27,
     "topic": "Projects",
-    "title": "From notebook to deploy: the MLOps ladder (simple version)",
+    "title": "🚀 From notebook to deploy: the MLOps ladder (simple version)",
     "summary": "A step-by-step ladder to make your ML project production-like without over-engineering.",
     "read_time": "4 min",
     "tags": ["MLOps", "Project", "Python"],
-    "hook": "You don’t need ‘full MLOps’ on day 1 — you need the right ladder.",
+    "hook": "💡 You don't need 'full MLOps' on day 1 — you need the right ladder.",
     "body": [
-      "Step 1: reproducible training (seed, config, saved artifacts).",
-      "Step 2: evaluation + test set discipline, plus experiment tracking (even a CSV).",
-      "Step 3: pipeline packaging (sklearn Pipeline) and model versioning.",
-      "Step 4: simple API (FastAPI) + input validation + monitoring hooks.",
-      "Step 5: scheduled retraining only when drift or performance drop is detected."
+      "🪜 Step 1 — Reproducible training:\n   • Fix random seeds\n   • Config-driven runs (not hardcoded values)\n   • Save all artifacts (model, metrics, plots)",
+      "📊 Step 2 — Evaluation discipline:\n   • Hold out a true test set\n   • Track experiments (even a CSV is fine to start)\n   • Never tune on the test set",
+      "📦 Step 3 — Pipeline packaging:\n   • Use sklearn Pipeline or equivalent\n   • Version your model artifacts\n   • Pin dependency versions",
+      "🌐 Step 4 — Simple API:\n   • FastAPI endpoint for predictions\n   • Input validation (pydantic)\n   • Basic monitoring hooks (log predictions + latency)",
+      "🔄 Step 5 — Scheduled retraining:\n   • Only when performance drops OR data drifts\n   • Monitor before triggering retrain\n   • Don't over-engineer until needed"
     ],
-    "cta": "If you’re building a project now, what step are you at?",
+    "cta": "💬 If you're building a project now, what step are you at?",
     "hashtags": ["mlops", "python", "machinelearning", "softwareengineering", "deployment"],
     "image_bullets": [
-      "Repro training",
-      "Eval discipline",
-      "Version artifacts",
-      "API + monitoring",
-      "Retrain on drift"
+      "🪜 Repro training",
+      "📊 Eval discipline",
+      "📦 Version artifacts",
+      "🌐 API + monitoring",
+      "🔄 Retrain on drift"
     ],
     "diagram_mermaid": "flowchart TD\n  N[Notebook] --> R[Repro run]\n  R --> E[Evaluation + tracking]\n  E --> V[Version artifacts]\n  V --> A[Serve via API]\n  A --> M[Monitor]\n  M -->|drift| T[Retrain]\n  T --> V\n"
   },
   {
     "day": 28,
     "topic": "Career",
-    "title": "How I answer ‘Tell me about your AI project’",
+    "title": "🎤 How I answer 'Tell me about your AI project'",
     "summary": "A structured interview answer that highlights impact, ownership, and technical depth.",
     "read_time": "3 min",
     "tags": ["Career", "Interview", "AI"],
-    "hook": "A great AI project answer is not a feature dump. It’s a story.",
+    "hook": "🎯 A great AI project answer is not a feature dump. It's a story.",
     "body": [
-      "Context: what problem, why it mattered, and who used it.",
-      "Approach: data, model choice, evaluation metrics, and baseline comparisons.",
-      "Engineering: pipeline, monitoring, latency/cost constraints, and failure handling.",
-      "Impact: measurable results (time saved, accuracy lift, cost reduction).",
-      "Reflection: what you’d improve next (data, eval, product iteration)."
+      "🌍 Context:\n   • What problem did you solve?\n   • Why did it matter to the business?\n   • Who were the end users?",
+      "🔬 Approach:\n   • What data did you use?\n   • Why did you choose that model?\n   • What evaluation metrics did you pick?\n   • What was your baseline comparison?",
+      "⚙️ Engineering:\n   • How did you build the pipeline?\n   • How did you handle monitoring?\n   • What latency/cost constraints did you face?\n   • How did you handle failures?",
+      "📈 Impact:\n   • Time saved (hours/week, manual steps eliminated)\n   • Accuracy improvement (% lift over baseline)\n   • Cost reduction ($, infra, headcount)\n   • Adoption rate",
+      "🔮 Reflection:\n   • What would you improve with more time?\n   • Better data? Better eval? Tighter product feedback loop?"
     ],
-    "cta": "If you want, paste your project in 5 lines and I’ll help shape it into this format.",
+    "cta": "📌 If you want, paste your project in 5 lines and I'll help shape it into this format.",
     "hashtags": ["career", "interviewprep", "ai", "machinelearning", "softwareengineering"],
     "image_bullets": [
-      "Context",
-      "Approach + metrics",
-      "Engineering constraints",
-      "Impact + reflection"
+      "🌍 Context first",
+      "🔬 Approach + metrics",
+      "⚙️ Engineering constraints",
+      "📈 Impact + reflection"
     ],
     "diagram_mermaid": "flowchart TD\n  A[Context] --> B[Baseline]\n  B --> C[Approach]\n  C --> D[Evaluation]\n  D --> E[Deployment]\n  E --> F[Impact]\n  F --> G[Next improvements]\n"
   },
   {
     "day": 29,
     "topic": "AI Automation",
-    "title": "Automate your workflow with an AI agent (safe MVP)",
+    "title": "🤖 Automate your workflow with an AI agent (safe MVP)",
     "summary": "A safe MVP plan: start read-only, add tools gradually, and measure ROI.",
     "read_time": "4 min",
     "tags": ["Automation", "Agents", "Productivity"],
-    "hook": "The safest agent is the one that starts read-only.",
+    "hook": "🛡️ The safest agent is the one that starts read-only.",
     "body": [
-      "MVP scope: summarize emails/tickets, draft replies, create task lists, generate reports.",
-      "Start with read-only tools: search, database read, docs retrieval — no write actions.",
-      "Add confidence gates: if the agent is unsure, ask clarifying questions or escalate.",
-      "Introduce write tools last (create tickets, send emails) with approval steps.",
-      "Track ROI: minutes saved per week, reduction in human errors, and user adoption."
+      "🎯 MVP scope to start with:\n   • Summarize emails/tickets\n   • Draft replies for human review\n   • Create task lists from meeting notes\n   • Generate status reports",
+      "👀 Start with read-only tools:\n   • Search and lookup\n   • Database read\n   • Document retrieval\n   • No write actions at first",
+      "🚦 Add confidence gates:\n   • If agent is unsure → ask clarifying questions\n   • If confidence below threshold → escalate to human\n   • Always show the agent's reasoning",
+      "✍️ Introduce write tools last:\n   • Create tickets / tasks\n   • Send emails or messages\n   • Always require human approval step first\n   • Expand autonomy gradually",
+      "📊 Track ROI weekly:\n   • Minutes saved per week\n   • Reduction in human errors\n   • User adoption rate\n   • Cost per automated run"
     ],
-    "cta": "Tell me your workflow (1 paragraph) and I’ll suggest an agent MVP scope.",
+    "cta": "💬 Tell me your workflow (1 paragraph) and I'll suggest an agent MVP scope.",
     "hashtags": ["automation", "aiagents", "productivity", "genai", "softwareengineering"],
     "image_bullets": [
-      "Start read-only",
-      "Confidence gates",
-      "Human-in-the-loop",
-      "Measure ROI"
+      "👀 Start read-only",
+      "🚦 Confidence gates",
+      "👤 Human-in-the-loop",
+      "📊 Measure ROI"
     ],
     "diagram_mermaid": "flowchart TD\n  W[Workflow] --> R[Read-only agent MVP]\n  R --> G[Confidence gates]\n  G --> H{Need approval?}\n  H -->|Yes| U[Human approve]\n  H -->|No| A[Auto action]\n  U --> A\n  A --> M[Measure ROI]\n"
   },
   {
     "day": 30,
     "topic": "Wrap-up",
-    "title": "30-day AI series: what to learn next (and how to stay consistent)",
+    "title": "🎉 30-day AI series: what to learn next (and how to stay consistent)",
     "summary": "A wrap-up roadmap for continuing AI/ML, RAG, DSA, and agent building with consistent output.",
     "read_time": "4 min",
     "tags": ["Roadmap", "Career", "Consistency"],
-    "hook": "Consistency is a skill — and it compounds faster than motivation.",
+    "hook": "🔥 Consistency is a skill — and it compounds faster than motivation.",
     "body": [
-      "Pick one track for the next 30 days: (1) ML foundations, (2) RAG systems, (3) Agents/automation, (4) DSA interviews.",
-      "Ship weekly: one mini-project or one case study post per week beats endless tutorials.",
-      "Create a feedback loop: track what posts get saves/comments and refine topics.",
-      "Build in public: share failures, trade-offs, and how you measured improvements.",
-      "Keep a simple cadence: learn → build → write → repeat."
+      "🗺️ Pick ONE track for the next 30 days:\n   • 🤖 Track 1: ML foundations (models, eval, pipelines)\n   • 🔍 Track 2: RAG systems (chunking, eval, re-ranking)\n   • 🛠️ Track 3: Agents/automation (tools, memory, safety)\n   • 💻 Track 4: DSA interview prep",
+      "🚀 Ship weekly:\n   • One mini-project per week\n   • One case study post per week\n   • Beats endless tutorials EVERY time",
+      "📊 Create a feedback loop:\n   • Track which posts get saves and comments\n   • Double down on what resonates\n   • Drop what doesn't after 3 tries",
+      "🌐 Build in public:\n   • Share failures, not just wins\n   • Show trade-offs and decisions\n   • Explain how you measured improvements",
+      "🔁 Keep the simple cadence:\n   Learn → Build → Write → Share → Repeat"
     ],
-    "cta": "If you followed this series, comment which track you want next — I’ll continue it.",
+    "cta": "💬 If you followed this series, comment which track you want next — I'll continue it.",
     "hashtags": ["ai", "machinelearning", "rag", "aiagents", "dsa", "career"],
     "image_bullets": [
-      "Choose next track",
-      "Ship weekly",
-      "Feedback loop",
-      "Learn → build → write"
+      "🗺️ Choose your next track",
+      "🚀 Ship weekly",
+      "📊 Feedback loop",
+      "🔁 Learn → build → write → repeat"
     ],
     "diagram_mermaid": "flowchart TD\n  L[Learn] --> B[Build]\n  B --> W[Write/Share]\n  W --> F[Feedback]\n  F --> L\n"
   }
