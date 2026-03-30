@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saurav Danej · 30 Days AI/ML LinkedIn Content</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <div class="brand">
+          <div class="brand__title">Saurav Danej</div>
+          <div class="brand__sub">30 Days · AI/ML · Python · RAG · DSA · Automation · Agents</div>
+        </div>
+        <nav class="nav">
+          <a class="nav__link" href="./index.html" aria-current="page">Posts</a>
+          <a class="nav__link" href="./images.html">Images</a>
+          <a class="nav__link" href="./interview.html">Interview Qs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <section class="panel">
+        <div class="panel__header">
+          <h1 class="h1">Daily posts</h1>
+          <div class="controls">
+            <input id="q" class="input" placeholder="Search: RAG, embeddings, agents, DSA..." />
+            <select id="tag" class="select" aria-label="Filter by tag">
+              <option value="">All tags</option>
+            </select>
+          </div>
+        </div>
+        <div id="list" class="postlist" aria-live="polite"></div>
+      </section>
+
+      <section class="panel panel--detail" aria-label="Post detail">
+        <div id="detail" class="detail empty">
+          <div class="muted">Select a day to preview, copy, and view diagram.</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="muted">
+          Links:
+          <a href="https://linkedin.com/in/sauravdnj" target="_blank" rel="noreferrer">LinkedIn</a>
+          ·
+          <a href="https://github.com/SauravDnj/" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+        <div class="muted">Built with HTML/CSS/JS · Diagrams via Mermaid</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

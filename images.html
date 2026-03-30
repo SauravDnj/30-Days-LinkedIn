@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images · Saurav Danej · LinkedIn Post Generator</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .gen {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 16px;
+        padding: 18px 0 26px;
+      }
+      @media (max-width: 980px) {
+        .gen {
+          grid-template-columns: 1fr;
+        }
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.2);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .small {
+        font-size: 12.5px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      .label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .field {
+        width: 100%;
+      }
+      textarea.field {
+        min-height: 90px;
+        resize: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <div class="brand">
+          <div class="brand__title">Saurav Danej</div>
+          <div class="brand__sub">Generate LinkedIn-ready PNG images from Day content</div>
+        </div>
+        <nav class="nav">
+          <a class="nav__link" href="./index.html">Posts</a>
+          <a class="nav__link" href="./images.html" aria-current="page">Images</a>
+          <a class="nav__link" href="./interview.html">Interview Qs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container gen">
+      <section class="panel">
+        <div class="panel__header">
+          <h1 class="h1">Image generator</h1>
+          <div class="small" style="margin-top: 10px">
+            Choose a day → tweak template → download PNG.
+            <br />
+            Recommended for LinkedIn: 1080×1080 or 1080×1350.
+          </div>
+        </div>
+        <div class="detail">
+          <div class="label">Day</div>
+          <input id="dayInput" class="input field" list="dayList" placeholder="Type: Day 1, Day 12..." />
+          <datalist id="dayList"></datalist>
+
+          <div class="row">
+            <div style="flex: 1 1 160px">
+              <div class="label">Format</div>
+              <select id="format" class="select field">
+                <option value="1080x1080">Square 1080×1080</option>
+                <option value="1080x1350" selected>Portrait 1080×1350</option>
+              </select>
+            </div>
+            <div style="flex: 1 1 160px">
+              <div class="label">Theme</div>
+              <select id="theme" class="select field">
+                <option value="night" selected>Night (default)</option>
+                <option value="light">Light</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="flex: 1 1 100%">
+              <div class="label">Custom title</div>
+              <input id="customTitle" class="input field" placeholder="Write your own post title..." />
+            </div>
+            <div style="flex: 1 1 100%">
+              <div class="label">Custom subtitle/topic</div>
+              <input id="customTopic" class="input field" placeholder="Example: RAG | AI Agents | Python" />
+            </div>
+            <div style="flex: 1 1 100%">
+              <div class="label">Custom bullets (one per line)</div>
+              <textarea id="customBullets" class="input field" placeholder="Write bullet 1&#10;Write bullet 2&#10;Write bullet 3"></textarea>
+            </div>
+            <div style="flex: 1 1 100%">
+              <div class="label">Custom footer</div>
+              <input id="customFooter" class="input field" placeholder="Example: Saurav Danej | linkedin.com/in/sauravdnj" />
+            </div>
+            <div style="flex: 1 1 100%">
+              <div class="label">Use case text</div>
+              <textarea id="customUseCase" class="input field" placeholder="Where to use this in real project..."></textarea>
+            </div>
+            <div style="flex: 1 1 100%">
+              <div class="label">Next step text</div>
+              <textarea id="customNextStep" class="input field" placeholder="Step-by-step next action..."></textarea>
+            </div>
+            <div style="flex: 1 1 100%">
+              <div class="label">Notes text</div>
+              <textarea id="customDetails" class="input field" placeholder="Additional normal notes..."></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <button id="download" class="btn btn--accent">Download PNG</button>
+            <button id="copytitle" class="btn">Copy title</button>
+            <button id="copybullets" class="btn">Copy bullets</button>
+            <button id="reset" class="btn">Reset from selected day</button>
+          </div>
+
+          <div class="mono" id="previewText" style="margin-top: 12px"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h1 class="h1">Preview</h1>
+          <div class="small" style="margin-top: 10px">
+            This is a simple, consistent template for a 30-day series.
+          </div>
+        </div>
+        <div class="detail">
+          <canvas id="c" width="1080" height="1350"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="muted">
+          Links:
+          <a href="https://linkedin.com/in/sauravdnj" target="_blank" rel="noreferrer">LinkedIn</a>
+          ·
+          <a href="https://github.com/SauravDnj/" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+        <div class="muted">PNG generator (no dependencies)</div>
+      </div>
+    </footer>
+
+    <script>
+      const $ = (s) => document.querySelector(s);
+      const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+      function wrapLines(ctx, text, maxWidth) {
+        function splitLongToken(token, width) {
+          const out = [];
+          let chunk = "";
+          for (const ch of token) {
+            const next = chunk + ch;
+            if (ctx.measureText(next).width <= width) {
+              chunk = next;
+            } else {
+              if (chunk) out.push(chunk);
+              chunk = ch;
+            }
+          }
+          if (chunk) out.push(chunk);
+          return out;
+        }
+
+        const words = text.split(/\s+/).filter(Boolean);
+        const lines = [];
+        let line = "";
+        for (const w of words) {
+          const chunks = ctx.measureText(w).width <= maxWidth ? [w] : splitLongToken(w, maxWidth);
+          for (const part of chunks) {
+            const test = line ? line + " " + part : part;
+            if (ctx.measureText(test).width <= maxWidth) line = test;
+            else {
+              if (line) lines.push(line);
+              line = part;
+            }
+          }
+        }
+        if (line) lines.push(line);
+        return lines;
+      }
+
+      function wrapLinesLimited(ctx, text, maxWidth, maxLines) {
+        const lines = wrapLines(ctx, text, maxWidth);
+        if (lines.length <= maxLines) return lines;
+        const out = lines.slice(0, maxLines);
+        out[maxLines - 1] = ellipsisLine(ctx, out[maxLines - 1], maxWidth);
+        return out;
+      }
+
+      function ellipsisLine(ctx, text, maxWidth) {
+        if (ctx.measureText(text).width <= maxWidth) return text;
+        const suffix = "...";
+        let s = text;
+        while (s.length > 0 && ctx.measureText(s + suffix).width > maxWidth) {
+          s = s.slice(0, -1);
+        }
+        return s + suffix;
+      }
+
+      function drawRoundedRect(ctx, x, y, w, h, r) {
+        const rr = clamp(r, 0, Math.min(w, h) / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + rr, y);
+        ctx.arcTo(x + w, y, x + w, y + h, rr);
+        ctx.arcTo(x + w, y + h, x, y + h, rr);
+        ctx.arcTo(x, y + h, x, y, rr);
+        ctx.arcTo(x, y, x + w, y, rr);
+        ctx.closePath();
+      }
+
+      function fitTextLines(ctx, lines, startSize, minSize, maxWidth, maxLines) {
+        let size = startSize;
+        let finalLines = [];
+        while (size >= minSize) {
+          ctx.font = `800 ${size}px Inter, Arial`;
+          const out = [];
+          for (const txt of lines) {
+            const wrapped = wrapLinesLimited(ctx, txt, maxWidth, maxLines);
+            out.push(...wrapped);
+          }
+          if (out.length <= maxLines) {
+            finalLines = out;
+            break;
+          }
+          size -= 2;
+        }
+        if (!finalLines.length) {
+          ctx.font = `800 ${minSize}px Inter, Arial`;
+          finalLines = [];
+          for (const txt of lines) finalLines.push(...wrapLinesLimited(ctx, txt, maxWidth, maxLines));
+          finalLines = finalLines.slice(0, maxLines);
+        }
+        return { size: Math.max(size, minSize), lines: finalLines };
+      }
+
+      function buildDefaultDetails(p) {
+        const body = (p.body || []).slice(0, 3).join(" ");
+        const cta = p.cta ? ` Action: ${p.cta}` : "";
+        return `${p.summary || ""} ${body}${cta}`.trim();
+      }
+
+      function drawSection(ctx, cfg) {
+        const { x, y, w, maxH, title, text, isLight, accent, bodyColor, W } = cfg;
+        if (!text || !text.trim()) return 0;
+
+        const fs = Math.round(W * 0.018);
+        const lh = Math.round(fs * 1.34);
+        ctx.font = `500 ${fs}px Inter, Arial`;
+        const lines = wrapLinesLimited(ctx, text.trim(), w - 20, 6);
+        const bodyLines = Math.max(1, Math.min(lines.length, 4));
+        const neededH = 34 + bodyLines * lh + 10;
+        const h = Math.max(56, Math.min(neededH, maxH));
+        if (h < 56) return 0;
+
+        drawRoundedRect(ctx, x, y, w, h, 12);
+        ctx.fillStyle = isLight ? "rgba(11,16,32,.05)" : "rgba(255,255,255,.05)";
+        ctx.fill();
+        ctx.strokeStyle = isLight ? "rgba(11,16,32,.10)" : "rgba(255,255,255,.10)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.fillStyle = accent;
+        ctx.font = `700 ${Math.round(W * 0.018)}px Inter, Arial`;
+        ctx.fillText(title, x + 10, y + 10);
+
+        ctx.fillStyle = bodyColor;
+        ctx.font = `500 ${fs}px Inter, Arial`;
+        let ty = y + 34;
+        for (const line of lines) {
+          if (ty > y + h - lh) break;
+          ctx.fillText(line, x + 10, ty);
+          ty += lh;
+        }
+        return h;
+      }
+
+      function renderCard({ p, format, theme }) {
+        const [W, H] = format.split("x").map((n) => Number(n));
+        const canvas = $("#c");
+        canvas.width = W;
+        canvas.height = H;
+        const ctx = canvas.getContext("2d");
+
+        const isLight = theme === "light";
+        const bg = isLight ? "#f7f8ff" : "#0b1020";
+        const panel = isLight ? "rgba(255,255,255,.92)" : "rgba(255,255,255,.06)";
+        const text = isLight ? "#0b1020" : "#e8ecff";
+        const muted = isLight ? "rgba(11,16,32,.68)" : "rgba(232,236,255,.70)";
+        const accent = "#7c5cff";
+        const accent2 = "#32d0aa";
+
+        // background
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+        // glow
+        ctx.globalAlpha = isLight ? 0.18 : 0.35;
+        const g1 = ctx.createRadialGradient(W * 0.18, H * 0.14, 10, W * 0.18, H * 0.14, W * 0.55);
+        g1.addColorStop(0, accent);
+        g1.addColorStop(1, "transparent");
+        ctx.fillStyle = g1;
+        ctx.fillRect(0, 0, W, H);
+        const g2 = ctx.createRadialGradient(W * 0.85, H * 0.18, 10, W * 0.85, H * 0.18, W * 0.55);
+        g2.addColorStop(0, accent2);
+        g2.addColorStop(1, "transparent");
+        ctx.fillStyle = g2;
+        ctx.fillRect(0, 0, W, H);
+        ctx.globalAlpha = 1;
+
+        // card
+        const pad = Math.round(W * 0.06);
+        const x = pad;
+        const y = pad;
+        const w = W - pad * 2;
+        const h = H - pad * 2;
+        drawRoundedRect(ctx, x, y, w, h, 36);
+        ctx.fillStyle = panel;
+        ctx.fill();
+        ctx.strokeStyle = isLight ? "rgba(11,16,32,.10)" : "rgba(255,255,255,.10)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // header
+        ctx.textBaseline = "top";
+        const day = `DAY ${p.day}`;
+        const topic = (p.customTopic || p.topic || "").toUpperCase();
+        ctx.fillStyle = accent;
+        ctx.font = `700 ${Math.round(W * 0.032)}px Inter, Arial`;
+        ctx.fillText(day, x + 34, y + 36);
+
+        ctx.fillStyle = muted;
+        ctx.font = `600 ${Math.round(W * 0.023)}px Inter, Arial`;
+        ctx.fillText(ellipsisLine(ctx, topic, w - 68), x + 34, y + 76);
+
+        // clip content area to avoid any overflow
+        const contentX = x + 34;
+        const contentY = y + 126;
+        const contentW = w - 68;
+        const contentH = h - 200;
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(contentX - 2, contentY - 2, contentW + 4, contentH + 4);
+        ctx.clip();
+
+        // title
+        ctx.fillStyle = text;
+        const titleFit = fitTextLines(
+          ctx,
+          [p.customTitle || p.title],
+          Math.round(W * 0.050),
+          Math.round(W * 0.030),
+          contentW,
+          4,
+        );
+        ctx.font = `800 ${titleFit.size}px Inter, Arial`;
+        let ty = contentY + 6;
+        const titleLineH = Math.round(titleFit.size * 1.18);
+        for (const line of titleFit.lines) {
+          ctx.fillText(line, contentX, ty);
+          ty += titleLineH;
+        }
+
+        // bullets
+        const sourceBullets =
+          p.customBullets && p.customBullets.length
+            ? p.customBullets
+            : (p.image_bullets && p.image_bullets.length ? p.image_bullets : p.body);
+        const bullets = sourceBullets.slice(0, 7);
+        const bulletSize = Math.round(W * 0.026);
+        ctx.font = `600 ${bulletSize}px Inter, Arial`;
+        ctx.fillStyle = muted;
+        let by = ty + 14;
+        const maxW = contentW;
+        const bulletLineH = Math.round(bulletSize * 1.38);
+        const footerTop = y + h - 82;
+        const reserveForSections = Math.round(H * 0.23);
+        const bottomLimit = footerTop - reserveForSections;
+        for (const b of bullets) {
+          const lines = wrapLinesLimited(ctx, "• " + b, maxW, 2);
+          for (const l of lines.slice(0, 2)) {
+            if (by > bottomLimit) break;
+            ctx.fillText(l, contentX, by);
+            by += bulletLineH;
+          }
+          by += Math.round(W * 0.008);
+          if (by > bottomLimit) break;
+        }
+
+        // normal step-by-step sections (adaptive: empty sections are skipped)
+        let sy = by + 10;
+        const sectionW = contentW;
+        const sectionGap = 8;
+        const sectionBottom = footerTop - 8;
+        const availableTotal = Math.max(0, sectionBottom - sy);
+        const perSectionMax = Math.max(58, Math.floor((availableTotal - 2 * sectionGap) / 3));
+
+        const used1 = drawSection(ctx, {
+          x: contentX,
+          y: sy,
+          w: sectionW,
+          maxH: perSectionMax,
+          title: "Use Case",
+          text: (p.customUseCase || "").trim(),
+          isLight,
+          accent,
+          bodyColor: muted,
+          W,
+        });
+        if (used1) sy += used1 + sectionGap;
+
+        const used2 = drawSection(ctx, {
+          x: contentX,
+          y: sy,
+          w: sectionW,
+          maxH: perSectionMax,
+          title: "Next Step",
+          text: (p.customNextStep || "").trim(),
+          isLight,
+          accent: accent2,
+          bodyColor: muted,
+          W,
+        });
+        if (used2) sy += used2 + sectionGap;
+
+        drawSection(ctx, {
+          x: contentX,
+          y: sy,
+          w: sectionW,
+          maxH: Math.max(56, sectionBottom - sy),
+          title: "Notes",
+          text: (p.customDetails || "").trim(),
+          isLight,
+          accent,
+          bodyColor: muted,
+          W,
+        });
+        ctx.restore();
+
+        // footer
+        ctx.fillStyle = isLight ? "rgba(11,16,32,.55)" : "rgba(232,236,255,.60)";
+        ctx.font = `600 ${Math.round(W * 0.022)}px Inter, Arial`;
+        const footerText = p.customFooter || "Saurav Danej · AI/ML";
+        const leftMax = Math.floor((w - 68) * 0.58);
+        ctx.fillText(ellipsisLine(ctx, footerText, leftMax), x + 34, y + h - 62);
+
+        ctx.fillStyle = accent2;
+        ctx.font = `700 ${Math.round(W * 0.022)}px Inter, Arial`;
+        ctx.textAlign = "right";
+        const rightMax = Math.floor((w - 68) * 0.36);
+        ctx.fillText(ellipsisLine(ctx, "linkedin.com/in/sauravdnj", rightMax), x + w - 34, y + h - 62);
+        ctx.textAlign = "left";
+      }
+
+      function parseHash() {
+        const m = location.hash.match(/#day-(\d+)/);
+        return m ? Number(m[1]) : null;
+      }
+
+      async function main() {
+        const res = await fetch("./content/posts.json");
+        const posts = await res.json();
+
+        const dayInput = $("#dayInput");
+        const dayList = $("#dayList");
+        for (const p of posts) {
+          const opt = document.createElement("option");
+          opt.value = `Day ${p.day}`;
+          opt.label = `Day ${p.day} · ${p.title}`;
+          dayList.appendChild(opt);
+        }
+
+        const state = {
+          posts,
+          day: parseHash() || 1,
+          format: $("#format").value,
+          theme: $("#theme").value,
+          customTitle: "",
+          customTopic: "",
+          customBullets: "",
+          customFooter: "",
+          customUseCase: "",
+          customNextStep: "",
+          customDetails: "",
+        };
+
+        const titleInput = $("#customTitle");
+        const topicInput = $("#customTopic");
+        const bulletsInput = $("#customBullets");
+        const footerInput = $("#customFooter");
+        const useCaseInput = $("#customUseCase");
+        const nextStepInput = $("#customNextStep");
+        const detailsInput = $("#customDetails");
+
+        function hydrateFromDay(p) {
+          state.customTitle = p.title || "";
+          state.customTopic = p.topic || "";
+          state.customBullets = ((p.image_bullets && p.image_bullets.length ? p.image_bullets : p.body) || []).slice(0, 8).join("\n");
+          state.customFooter = "Saurav Danej · AI/ML";
+          state.customUseCase = p.summary || "";
+          state.customNextStep = p.cta || "Pick one point and implement it today.";
+          state.customDetails = buildDefaultDetails(p);
+          titleInput.value = state.customTitle;
+          topicInput.value = state.customTopic;
+          bulletsInput.value = state.customBullets;
+          footerInput.value = state.customFooter;
+          useCaseInput.value = state.customUseCase;
+          nextStepInput.value = state.customNextStep;
+          detailsInput.value = state.customDetails;
+        }
+
+        const sync = () => {
+          const p = posts.find((x) => x.day === Number(state.day)) || posts[0];
+          const vm = {
+            ...p,
+            customTitle: state.customTitle.trim(),
+            customTopic: state.customTopic.trim(),
+            customBullets: state.customBullets
+              .split(/\r?\n/)
+              .map((x) => x.trim())
+              .filter(Boolean),
+            customFooter: state.customFooter.trim(),
+            customUseCase: state.customUseCase.trim(),
+            customNextStep: state.customNextStep.trim(),
+            customDetails: state.customDetails.trim(),
+          };
+          const bullets =
+            vm.customBullets && vm.customBullets.length
+              ? vm.customBullets.slice(0, 8)
+              : (p.image_bullets && p.image_bullets.length ? p.image_bullets : p.body).slice(0, 8);
+          $("#previewText").textContent =
+            `${vm.customTitle || p.title}\n\n` +
+            bullets.map((b) => `- ${b}`).join("\n") +
+            `\n\nUse Case:\n${vm.customUseCase || ""}\n\nNext Step:\n${vm.customNextStep || ""}\n\nNotes:\n${vm.customDetails || buildDefaultDetails(p)}`;
+          renderCard({ p: vm, format: state.format, theme: state.theme });
+          location.hash = `day-${p.day}`;
+        };
+
+        dayInput.value = `Day ${state.day}`;
+        hydrateFromDay(posts.find((x) => x.day === Number(state.day)) || posts[0]);
+
+        async function ensureFontsReady() {
+          try {
+            if (document.fonts && document.fonts.ready) {
+              await document.fonts.ready;
+            }
+          } catch {
+            // continue with fallback fonts
+          }
+        }
+        await ensureFontsReady();
+        sync();
+
+        function parseDayInput(v) {
+          const m = String(v || "").match(/(\d+)/);
+          const n = m ? Number(m[1]) : NaN;
+          if (!Number.isFinite(n)) return null;
+          return clamp(n, 1, posts.length);
+        }
+
+        dayInput.addEventListener("input", () => {
+          const d = parseDayInput(dayInput.value);
+          if (!d) return;
+          state.day = d;
+          const p = posts.find((x) => x.day === Number(state.day)) || posts[0];
+          hydrateFromDay(p);
+          sync();
+        });
+        $("#format").addEventListener("change", () => {
+          state.format = $("#format").value;
+          sync();
+        });
+        $("#theme").addEventListener("change", () => {
+          state.theme = $("#theme").value;
+          sync();
+        });
+
+        $("#download").addEventListener("click", () => {
+          const a = document.createElement("a");
+          a.download = `saurav-danej-day-${String(state.day).padStart(2, "0")}.png`;
+          a.href = $("#c").toDataURL("image/png");
+          a.click();
+        });
+        $("#copytitle").addEventListener("click", async () => {
+          const p = posts.find((x) => x.day === Number(state.day)) || posts[0];
+          await navigator.clipboard.writeText(state.customTitle.trim() || p.title);
+          $("#copytitle").textContent = "Copied!";
+          setTimeout(() => ($("#copytitle").textContent = "Copy title"), 900);
+        });
+        $("#copybullets").addEventListener("click", async () => {
+          const p = posts.find((x) => x.day === Number(state.day)) || posts[0];
+          const bullets =
+            state.customBullets.trim().length > 0
+              ? state.customBullets
+                  .split(/\r?\n/)
+                  .map((x) => x.trim())
+                  .filter(Boolean)
+              : (p.image_bullets && p.image_bullets.length ? p.image_bullets : p.body).slice(0, 8);
+          await navigator.clipboard.writeText(bullets.map((b) => `- ${b}`).join("\n"));
+          $("#copybullets").textContent = "Copied!";
+          setTimeout(() => ($("#copybullets").textContent = "Copy bullets"), 900);
+        });
+        $("#reset").addEventListener("click", () => {
+          const p = posts.find((x) => x.day === Number(state.day)) || posts[0];
+          hydrateFromDay(p);
+          sync();
+        });
+
+        titleInput.addEventListener("input", () => {
+          state.customTitle = titleInput.value;
+          sync();
+        });
+        topicInput.addEventListener("input", () => {
+          state.customTopic = topicInput.value;
+          sync();
+        });
+        bulletsInput.addEventListener("input", () => {
+          state.customBullets = bulletsInput.value;
+          sync();
+        });
+        footerInput.addEventListener("input", () => {
+          state.customFooter = footerInput.value;
+          sync();
+        });
+        useCaseInput.addEventListener("input", () => {
+          state.customUseCase = useCaseInput.value;
+          sync();
+        });
+        nextStepInput.addEventListener("input", () => {
+          state.customNextStep = nextStepInput.value;
+          sync();
+        });
+        detailsInput.addEventListener("input", () => {
+          state.customDetails = detailsInput.value;
+          sync();
+        });
+
+        window.addEventListener("hashchange", () => {
+          const d = parseHash();
+          if (d) {
+            state.day = d;
+            dayInput.value = `Day ${d}`;
+            const p = posts.find((x) => x.day === Number(state.day)) || posts[0];
+            hydrateFromDay(p);
+            sync();
+          }
+        });
+      }
+
+      main().catch((e) => {
+        document.body.innerHTML = `<div class="container" style="padding:24px"><div class="panel"><div class="detail"><div class="muted">Failed to load content. Use a local web server.</div><div class="mono">${String(
+          e && e.stack ? e.stack : e,
+        )}</div></div></div></div>`;
+      });
+    </script>
+  </body>
+</html>

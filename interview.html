@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interview Questions · Saurav Danej</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .grid {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 16px;
+        padding: 18px 0 26px;
+      }
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .list {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: calc(100vh - 170px);
+        overflow: auto;
+      }
+      .q {
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.16);
+        border-radius: 14px;
+        padding: 12px;
+      }
+      .q__t {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      .q__a {
+        color: var(--muted);
+        margin-top: 8px;
+        line-height: 1.55;
+      }
+      .q__meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .section {
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.14);
+        border-radius: 14px;
+        padding: 12px;
+      }
+      .s-title {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      .small {
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      .plan-item {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px;
+        margin-top: 8px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .plan-item .line {
+        margin-top: 6px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      .plan-item .line strong {
+        color: var(--text);
+      }
+      .cols {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 12px;
+      }
+      @media (max-width: 980px) {
+        .cols {
+          grid-template-columns: 1fr;
+        }
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.2);
+      }
+      .field {
+        width: 100%;
+      }
+      textarea.field {
+        min-height: 88px;
+        resize: vertical;
+      }
+      .builder-select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        outline: none;
+      }
+      .builder-select option {
+        background: #131b36;
+        color: #e8ecff;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <div class="brand">
+          <div class="brand__title">Saurav Danej</div>
+          <div class="brand__sub">AI/ML · Python · RAG · Agents · Automation · DSA</div>
+        </div>
+        <nav class="nav">
+          <a class="nav__link" href="./index.html">Posts</a>
+          <a class="nav__link" href="./images.html">Images</a>
+          <a class="nav__link" href="./interview.html" aria-current="page">Interview Qs</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container grid">
+      <section class="panel">
+        <div class="panel__header">
+          <h1 class="h1">Categories</h1>
+          <div class="controls">
+            <input id="q" class="input" placeholder="Search: embeddings, OOP, Big-O..." />
+          </div>
+        </div>
+        <div id="cats" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h1 class="h1" id="title">Questions</h1>
+          <div class="muted" id="subtitle" style="margin-top: 10px"></div>
+          <div class="btnrow" style="margin-top: 12px">
+            <button class="btn btn--accent" id="copy">Copy all (Q+A)</button>
+            <button class="btn" id="copyPlan">Copy 30-day post plan</button>
+            <button class="btn" id="downloadPlanTxt">Download 30-day Q&A TXT</button>
+            <button class="btn" id="downloadPlanZip">Download 30 images ZIP</button>
+          </div>
+        </div>
+        <div id="qs" class="detail"></div>
+        <div class="detail" style="border-top:1px solid var(--line)">
+          <div class="cols">
+            <div class="section">
+              <div class="s-title">30-Day Post Plan</div>
+              <div class="small" style="margin-top: 6px">
+                Auto-created from selected language/framework category.
+              </div>
+              <div id="plan" style="margin-top: 8px"></div>
+            </div>
+            <div class="section">
+              <div class="s-title">Question Image Builder</div>
+              <div class="small" style="margin-top: 6px">
+                Create interview-question post images (same style workflow).
+              </div>
+              <div class="row" style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+                <select id="builderCat" class="builder-select field"></select>
+                <select id="qidx" class="builder-select field"></select>
+                <div id="qmeta" class="small field"></div>
+                <select id="format" class="builder-select field">
+                  <option value="1080x1080">Square 1080×1080</option>
+                  <option value="1080x1350" selected>Portrait 1080×1350</option>
+                </select>
+                <select id="theme" class="builder-select field">
+                  <option value="night" selected>Night</option>
+                  <option value="light">Light</option>
+                </select>
+                <textarea id="imgTitle" class="input field" placeholder="Custom image title"></textarea>
+                <textarea id="imgBullets" class="input field" placeholder="Bullets (one per line)"></textarea>
+                <button class="btn" id="prevQ">Previous</button>
+                <button class="btn" id="nextQ">Next</button>
+                <button class="btn btn--accent" id="download">Download PNG</button>
+                <button class="btn" id="downloadAll">Download All Questions PNG</button>
+              </div>
+              <canvas id="c" width="1080" height="1350" style="margin-top:10px"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="muted">
+          Links:
+          <a href="https://linkedin.com/in/sauravdnj" target="_blank" rel="noreferrer">LinkedIn</a>
+          ·
+          <a href="https://github.com/SauravDnj/" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+        <div class="muted">Interview prep bank</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script>
+      const $ = (s) => document.querySelector(s);
+      const escapeHtml = (s) =>
+        s
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+      async function load() {
+        const res = await fetch("./content/interview_questions.json");
+        return await res.json();
+      }
+
+      function wrapLines(ctx, text, maxWidth) {
+        const words = String(text || "").split(/\s+/).filter(Boolean);
+        const lines = [];
+        let line = "";
+        for (const w of words) {
+          const t = line ? line + " " + w : w;
+          if (ctx.measureText(t).width <= maxWidth) line = t;
+          else {
+            if (line) lines.push(line);
+            line = w;
+          }
+        }
+        if (line) lines.push(line);
+        return lines;
+      }
+
+      function ellipsisLine(ctx, text, maxWidth) {
+        if (ctx.measureText(text).width <= maxWidth) return text;
+        let s = text;
+        while (s.length > 0 && ctx.measureText(s + "...").width > maxWidth) s = s.slice(0, -1);
+        return s + "...";
+      }
+
+      function wrapLinesLimited(ctx, text, maxWidth, maxLines) {
+        const lines = wrapLines(ctx, text, maxWidth);
+        if (lines.length <= maxLines) return lines;
+        const out = lines.slice(0, maxLines);
+        out[maxLines - 1] = ellipsisLine(ctx, out[maxLines - 1], maxWidth);
+        return out;
+      }
+
+      function drawRoundedRect(ctx, x, y, w, h, r) {
+        const rr = clamp(r, 0, Math.min(w, h) / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + rr, y);
+        ctx.arcTo(x + w, y, x + w, y + h, rr);
+        ctx.arcTo(x + w, y + h, x, y + h, rr);
+        ctx.arcTo(x, y + h, x, y, rr);
+        ctx.arcTo(x, y, x + w, y, rr);
+        ctx.closePath();
+      }
+
+      function renderInterviewCardToCanvas(canvas, payload, opts) {
+        const [W, H] = opts.format.split("x").map(Number);
+        canvas.width = W;
+        canvas.height = H;
+        const ctx = canvas.getContext("2d");
+
+        const light = opts.theme === "light";
+        const bg = light ? "#f6f8ff" : "#0b1020";
+        const text = light ? "#0b1020" : "#e8ecff";
+        const muted = light ? "rgba(11,16,32,.70)" : "rgba(232,236,255,.75)";
+        const accent = "#7c5cff";
+        const accent2 = "#32d0aa";
+
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+        const g1 = ctx.createRadialGradient(W * 0.2, H * 0.15, 10, W * 0.2, H * 0.15, W * 0.6);
+        g1.addColorStop(0, "rgba(124,92,255,.35)");
+        g1.addColorStop(1, "transparent");
+        ctx.fillStyle = g1;
+        ctx.fillRect(0, 0, W, H);
+
+        const pad = Math.round(W * 0.06);
+        const x = pad,
+          y = pad,
+          w = W - pad * 2,
+          h = H - pad * 2;
+        drawRoundedRect(ctx, x, y, w, h, 32);
+        ctx.fillStyle = light ? "rgba(255,255,255,.92)" : "rgba(255,255,255,.06)";
+        ctx.fill();
+        ctx.strokeStyle = light ? "rgba(11,16,32,.10)" : "rgba(255,255,255,.10)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.textBaseline = "top";
+        ctx.fillStyle = accent;
+        ctx.font = `700 ${Math.round(W * 0.03)}px Inter, Arial`;
+        ctx.fillText("INTERVIEW SERIES", x + 28, y + 30);
+        ctx.fillStyle = accent2;
+        ctx.font = `700 ${Math.round(W * 0.022)}px Inter, Arial`;
+        ctx.fillText((payload.catTitle || "INTERVIEW").toUpperCase(), x + 28, y + 70);
+
+        ctx.fillStyle = text;
+        ctx.font = `800 ${Math.round(W * 0.049)}px Inter, Arial`;
+        const tLines = wrapLinesLimited(ctx, payload.title, w - 56, 3);
+        let ty = y + 118;
+        const tlh = Math.round(W * 0.056);
+        for (const line of tLines) {
+          ctx.fillText(line, x + 28, ty);
+          ty += tlh;
+        }
+
+        ctx.fillStyle = muted;
+        ctx.font = `600 ${Math.round(W * 0.025)}px Inter, Arial`;
+        let by = ty + 12;
+        const blh = Math.round(W * 0.038);
+        for (const b of payload.bullets.slice(0, 7)) {
+          const lines = wrapLinesLimited(ctx, "• " + b, w - 56, 2);
+          for (const line of lines) {
+            if (by > y + h - 120) break;
+            ctx.fillText(line, x + 28, by);
+            by += blh;
+          }
+          by += 4;
+        }
+
+        ctx.fillStyle = muted;
+        ctx.font = `600 ${Math.round(W * 0.021)}px Inter, Arial`;
+        ctx.fillText("Saurav Danej · Interview Prep", x + 28, y + h - 46);
+      }
+
+      function renderCats(data, q) {
+        const cats = $("#cats");
+        cats.innerHTML = "";
+        const qNorm = (q || "").trim().toLowerCase();
+
+        for (const c of data.categories) {
+          const hay = [c.title, c.desc, ...(c.tags || [])].join(" ").toLowerCase();
+          if (qNorm && !hay.includes(qNorm)) continue;
+          const card = document.createElement("div");
+          card.className = "card";
+          card.tabIndex = 0;
+          card.role = "button";
+          card.addEventListener("click", () => selectCat(c.id));
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") selectCat(c.id);
+          });
+          card.innerHTML = `
+            <div class="title">${escapeHtml(c.title)}</div>
+            <div class="subtitle">${escapeHtml(c.desc)}</div>
+            <div class="tags" style="margin-top:10px">
+              ${(c.tags || [])
+                .slice(0, 5)
+                .map((t, i) => `<span class="${i % 2 ? "tag" : "tag tag--a"}">${escapeHtml(t)}</span>`)
+                .join("")}
+            </div>
+          `;
+          cats.appendChild(card);
+        }
+      }
+
+      function parseHash() {
+        const m = location.hash.match(/#cat-([a-z0-9_-]+)/i);
+        return m ? m[1] : null;
+      }
+
+      function selectCat(id) {
+        location.hash = `cat-${id}`;
+      }
+
+      function renderQs(data, id) {
+        const cat = data.categories.find((c) => c.id === id) || data.categories[0];
+        $("#title").textContent = cat.title;
+        $("#subtitle").textContent = cat.desc;
+        const wrap = $("#qs");
+        wrap.innerHTML = "";
+
+        for (let i = 0; i < cat.questions.length; i++) {
+          const qa = cat.questions[i];
+          const div = document.createElement("div");
+          div.className = "q";
+          div.style.cursor = "pointer";
+          div.innerHTML = `
+            <div class="q__t">${escapeHtml(qa.q)}</div>
+            <div class="q__a">${escapeHtml(qa.a)}</div>
+            <div class="q__meta">
+              ${(qa.tags || []).map((t) => `<span class="tag tag--a">${escapeHtml(t)}</span>`).join("")}
+              ${qa.level ? `<span class="tag">${escapeHtml(qa.level)}</span>` : ""}
+            </div>
+          `;
+          div.addEventListener("click", () => {
+            if (typeof window.__openQuestionInBuilder === "function") {
+              window.__openQuestionInBuilder(cat.id, i);
+            }
+          });
+          wrap.appendChild(div);
+        }
+
+        renderPlan(cat);
+        if (typeof window.__focusBuilderCategory === "function") {
+          window.__focusBuilderCategory(cat.id);
+        }
+
+        $("#copy").onclick = async () => {
+          const lines = [];
+          lines.push(cat.title);
+          lines.push(cat.desc);
+          lines.push("");
+          cat.questions.forEach((qa, i) => {
+            lines.push(`${i + 1}. ${qa.q}`);
+            lines.push(`   ${qa.a}`);
+            lines.push("");
+          });
+          await navigator.clipboard.writeText(lines.join("\n"));
+          $("#copy").textContent = "Copied!";
+          setTimeout(() => ($("#copy").textContent = "Copy all (Q+A)"), 900);
+        };
+      }
+
+      function renderPlan(cat) {
+        const wrap = $("#plan");
+        const plan = [];
+        const q = cat.questions || [];
+        for (let d = 1; d <= 30; d++) {
+          const qa = q[(d - 1) % q.length];
+          plan.push({
+            day: d,
+            q: qa ? qa.q : `Core concept in ${cat.title}`,
+            a: qa ? qa.a : "Provide explanation + practical example + trade-off discussion.",
+          });
+        }
+
+        wrap.innerHTML = plan
+          .map(
+            (p) => `
+            <div class="plan-item">
+              <div class="line"><strong>Day ${p.day}</strong></div>
+              <div class="line"><strong>${escapeHtml(cat.title)}</strong></div>
+              <div class="line"><strong>Question:</strong> ${escapeHtml(p.q)}</div>
+              <div class="line"><strong>Answer:</strong> ${escapeHtml(p.a)}</div>
+            </div>`,
+          )
+          .join("");
+
+        $("#copyPlan").onclick = async () => {
+          const lines = [];
+          lines.push(`${cat.title} - 30 Day Q&A Post Plan`);
+          lines.push("");
+          for (const p of plan) {
+            lines.push(`Day ${p.day}: ${p.q}`);
+            lines.push(`Answer: ${p.a}`);
+            lines.push("");
+          }
+          await navigator.clipboard.writeText(lines.join("\n"));
+          $("#copyPlan").textContent = "Copied!";
+          setTimeout(() => ($("#copyPlan").textContent = "Copy 30-day post plan"), 900);
+        };
+
+        $("#downloadPlanTxt").onclick = () => {
+          const lines = [];
+          lines.push(`${cat.title} - 30 Day Q&A Post Plan`);
+          lines.push("");
+          for (const p of plan) {
+            lines.push(`Day ${p.day}: ${p.q}`);
+            lines.push(`Answer: ${p.a}`);
+            lines.push("");
+          }
+          const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = `${cat.id}-30-day-qa-plan.txt`;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        };
+
+        $("#downloadPlanZip").onclick = async () => {
+          const btn = $("#downloadPlanZip");
+          btn.textContent = "Building ZIP...";
+          btn.disabled = true;
+          try {
+            const zip = new JSZip();
+            const tempCanvas = document.createElement("canvas");
+            const format = ($("#format") && $("#format").value) || "1080x1350";
+            const theme = ($("#theme") && $("#theme").value) || "night";
+
+            for (const p of plan) {
+              const payload = {
+                catTitle: cat.title,
+                title: `Day ${p.day} · ${cat.title}`,
+                bullets: [
+                  `Question: ${p.q}`,
+                  `Answer: ${p.a}`,
+                  "Add one real project example",
+                  "Mention trade-offs and edge cases",
+                ],
+              };
+              renderInterviewCardToCanvas(tempCanvas, payload, { format, theme });
+              const dataUrl = tempCanvas.toDataURL("image/png");
+              const base64 = dataUrl.split(",")[1];
+              zip.file(`${cat.id}-day-${String(p.day).padStart(2, "0")}.png`, base64, { base64: true });
+            }
+
+            const blob = await zip.generateAsync({ type: "blob" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `${cat.id}-30-day-images.zip`;
+            a.click();
+            URL.revokeObjectURL(a.href);
+          } finally {
+            btn.textContent = "Download 30 images ZIP";
+            btn.disabled = false;
+          }
+        };
+      }
+
+      function setupImageBuilder(data) {
+        const builderCat = $("#builderCat");
+        const qidx = $("#qidx");
+        const qmeta = $("#qmeta");
+        const format = $("#format");
+        const theme = $("#theme");
+        const imgTitle = $("#imgTitle");
+        const imgBullets = $("#imgBullets");
+        const canvas = $("#c");
+        const prevQ = $("#prevQ");
+        const nextQ = $("#nextQ");
+        const download = $("#download");
+        const downloadAll = $("#downloadAll");
+
+        const byCatAndLocal = {};
+        const categories = data.categories || [];
+
+        builderCat.innerHTML = "";
+        categories.forEach((cat) => {
+          const opt = document.createElement("option");
+          opt.value = cat.id;
+          opt.textContent = `${cat.title} (${(cat.questions || []).length})`;
+          builderCat.appendChild(opt);
+        });
+
+        const state = {
+          catId: categories[0] ? categories[0].id : "",
+          idx: 0,
+          format: format.value,
+          theme: theme.value,
+          title: "Interview Prep",
+          bullets: [],
+        };
+
+        function getActiveCategory() {
+          return categories.find((c) => c.id === state.catId) || categories[0];
+        }
+
+        function rebuildQuestionDropdown() {
+          const cat = getActiveCategory();
+          qidx.innerHTML = "";
+          (cat.questions || []).forEach((qa, i) => {
+            const opt = document.createElement("option");
+            opt.value = String(i);
+            opt.textContent = `Q${i + 1}: ${qa.q}`;
+            qidx.appendChild(opt);
+            if (!byCatAndLocal[cat.id]) byCatAndLocal[cat.id] = {};
+            byCatAndLocal[cat.id][i] = i;
+          });
+          state.idx = clamp(state.idx, 0, Math.max(0, (cat.questions || []).length - 1));
+          qidx.value = String(state.idx);
+        }
+
+        function hydrateFromQuestion(i) {
+          const cat = getActiveCategory();
+          const qs = cat.questions || [];
+          const safe = clamp(i, 0, Math.max(0, qs.length - 1));
+          state.idx = safe;
+          const qa = qs[safe];
+          if (!qa) return;
+          state.title = `${cat.title}: ${qa.q}`;
+          state.bullets = [
+            `Q: ${qa.q}`,
+            `A: ${qa.a.slice(0, 180)}...`,
+            "Add one practical project example",
+            "Mention trade-offs and edge cases",
+          ];
+          qidx.value = String(safe);
+          imgTitle.value = state.title;
+          imgBullets.value = state.bullets.join("\n");
+          qmeta.textContent = `Category: ${cat.title} · Showing Q${safe + 1}/${qs.length}`;
+        }
+
+        function renderCard() {
+          const cat = getActiveCategory();
+          renderInterviewCardToCanvas(
+            canvas,
+            {
+              catTitle: cat ? cat.title : "Interview",
+              title: state.title,
+              bullets: state.bullets,
+            },
+            { format: state.format, theme: state.theme },
+          );
+        }
+
+        const sync = () => {
+          state.title = imgTitle.value.trim();
+          state.bullets = imgBullets.value
+            .split(/\r?\n/)
+            .map((x) => x.trim())
+            .filter(Boolean);
+          state.format = format.value;
+          state.theme = theme.value;
+          renderCard();
+        };
+
+        builderCat.value = state.catId;
+        rebuildQuestionDropdown();
+        hydrateFromQuestion(0);
+        renderCard();
+
+        qidx.onchange = () => {
+          const next = Number(qidx.value) || 0;
+          hydrateFromQuestion(next);
+          renderCard();
+        };
+        builderCat.onchange = () => {
+          state.catId = builderCat.value;
+          state.idx = 0;
+          rebuildQuestionDropdown();
+          hydrateFromQuestion(0);
+          renderCard();
+        };
+        prevQ.onclick = () => {
+          hydrateFromQuestion(state.idx - 1);
+          renderCard();
+        };
+        nextQ.onclick = () => {
+          hydrateFromQuestion(state.idx + 1);
+          renderCard();
+        };
+        format.onchange = sync;
+        theme.onchange = sync;
+        imgTitle.oninput = sync;
+        imgBullets.oninput = sync;
+
+        download.onclick = () => {
+          const cat = getActiveCategory();
+          const qa = (cat.questions || [])[state.idx];
+          if (!qa) return;
+          const a = document.createElement("a");
+          a.download = `interview-${cat.id}-q-${String(state.idx + 1).padStart(2, "0")}.png`;
+          a.href = canvas.toDataURL("image/png");
+          a.click();
+        };
+
+        downloadAll.onclick = async () => {
+          const original = state.idx;
+          const cat = getActiveCategory();
+          const qs = cat.questions || [];
+          downloadAll.textContent = "Preparing downloads...";
+          downloadAll.disabled = true;
+          for (let i = 0; i < qs.length; i++) {
+            hydrateFromQuestion(i);
+            renderCard();
+            const a = document.createElement("a");
+            a.download = `interview-${cat.id}-q-${String(i + 1).padStart(2, "0")}.png`;
+            a.href = canvas.toDataURL("image/png");
+            a.click();
+            await new Promise((r) => setTimeout(r, 180));
+          }
+          hydrateFromQuestion(original);
+          renderCard();
+          downloadAll.textContent = "Download All Questions PNG";
+          downloadAll.disabled = false;
+        };
+
+        window.__openQuestionInBuilder = (catId, localIndex) => {
+          if (!categories.find((c) => c.id === catId)) return;
+          state.catId = catId;
+          builderCat.value = catId;
+          rebuildQuestionDropdown();
+          const idx = typeof localIndex === "number" ? localIndex : 0;
+          hydrateFromQuestion(idx);
+          renderCard();
+          canvas.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        };
+        window.__focusBuilderCategory = (catId) => {
+          if (!categories.find((c) => c.id === catId)) return;
+          state.catId = catId;
+          builderCat.value = catId;
+          rebuildQuestionDropdown();
+          hydrateFromQuestion(0);
+          renderCard();
+        };
+      }
+
+      load()
+        .then((data) => {
+          const q = $("#q");
+          renderCats(data, "");
+          setupImageBuilder(data);
+
+          const initial = parseHash() || data.categories[0].id;
+          renderQs(data, initial);
+
+          q.addEventListener("input", () => renderCats(data, q.value));
+          window.addEventListener("hashchange", () => {
+            const id = parseHash() || data.categories[0].id;
+            renderQs(data, id);
+          });
+        })
+        .catch((e) => {
+          $("#qs").innerHTML = `<div class="muted">Failed to load interview questions. Use a local web server.</div><div class="mono">${escapeHtml(
+            String(e && e.stack ? e.stack : e),
+          )}</div>`;
+        });
+    </script>
+  </body>
+</html>

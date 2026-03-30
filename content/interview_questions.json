@@ -1,0 +1,365 @@
+{
+  "categories": [
+    {
+      "id": "ml-foundations",
+      "title": "AI/ML Foundations",
+      "desc": "Core concepts you should explain clearly: data, objectives, metrics, and failure modes.",
+      "tags": ["AI", "ML", "metrics", "bias-variance", "validation"],
+      "questions": [
+        {
+          "q": "Explain the difference between AI, ML, and Deep Learning.",
+          "a": "AI is the broad field of building systems that appear intelligent (rules, search, ML). ML is a subset where models learn patterns from data. Deep Learning is a subset of ML that uses neural networks to learn representations, typically requiring more data/compute.",
+          "level": "Easy",
+          "tags": ["foundations"]
+        },
+        {
+          "q": "What is bias-variance trade-off?",
+          "a": "Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to noise in training data (overfitting). Increasing model complexity often decreases bias but increases variance; regularization and more data help control variance.",
+          "level": "Easy",
+          "tags": ["modeling"]
+        },
+        {
+          "q": "When is accuracy a bad metric?",
+          "a": "Accuracy can be misleading in imbalanced datasets (e.g., 99% non-fraud). Use precision/recall, F1, PR-AUC, ROC-AUC, and cost-sensitive metrics depending on business impact of FP vs FN.",
+          "level": "Easy",
+          "tags": ["metrics"]
+        },
+        {
+          "q": "What is data leakage and how do you prevent it?",
+          "a": "Leakage is when training uses information unavailable at inference time (future info, preprocessing before splitting, duplicates across splits). Prevent by splitting first, fitting transforms only on train via pipelines, and using time/group splits where appropriate.",
+          "level": "Medium",
+          "tags": ["validation", "mlops"]
+        },
+        {
+          "q": "Explain precision vs recall with an example.",
+          "a": "Precision answers: among predicted positives, how many are correct. Recall answers: among actual positives, how many did we capture. Example: in fraud detection, high recall catches more fraud but may reduce precision (more false alerts).",
+          "level": "Easy",
+          "tags": ["metrics"]
+        },
+        {
+          "q": "How do you choose a baseline model?",
+          "a": "Start with a simple, interpretable baseline aligned to the task (logistic regression, linear regression, simple tree). Establish a metric target and compare improvements to justify complexity and cost.",
+          "level": "Medium",
+          "tags": ["modeling"]
+        },
+        {
+          "q": "What causes model drift in production?",
+          "a": "Data distribution changes (covariate shift), label/target changes, concept drift, seasonality, product changes, and feedback loops. Monitor input stats, performance proxies, and periodically evaluate on labeled data.",
+          "level": "Medium",
+          "tags": ["mlops"]
+        },
+        {
+          "q": "Explain cross-validation and when you should not use standard k-fold.",
+          "a": "CV estimates generalization by training/evaluating across folds. Avoid standard random k-fold for time series (use time-based CV) and grouped entities (use group-aware CV) to prevent leakage.",
+          "level": "Medium",
+          "tags": ["validation"]
+        }
+      ]
+    },
+    {
+      "id": "python",
+      "title": "Python for ML",
+      "desc": "Python skills that show engineering maturity: clean code, performance basics, and data handling.",
+      "tags": ["Python", "NumPy", "Pandas", "testing", "packaging"],
+      "questions": [
+        {
+          "q": "What is the difference between a list and a NumPy array?",
+          "a": "Lists are general-purpose containers; NumPy arrays store homogeneous numeric data contiguously and enable fast vectorized operations implemented in C/Fortran, often much faster than Python loops.",
+          "level": "Easy",
+          "tags": ["numpy"]
+        },
+        {
+          "q": "Explain broadcasting in NumPy.",
+          "a": "Broadcasting allows operations on arrays of different shapes by expanding dimensions of size 1 to match the other operand. It avoids explicit replication but can produce subtle shape bugs if dimensions align unexpectedly.",
+          "level": "Medium",
+          "tags": ["numpy"]
+        },
+        {
+          "q": "How do you avoid SettingWithCopyWarning in Pandas?",
+          "a": "Prefer .loc for assignment (df.loc[mask, 'col'] = value) and avoid chained indexing. If working on a slice, use .copy() explicitly when needed.",
+          "level": "Easy",
+          "tags": ["pandas"]
+        },
+        {
+          "q": "What’s your approach to handling missing values?",
+          "a": "First understand missingness (MCAR/MAR/MNAR if relevant). Use domain-aware imputation, add missing indicators, and ensure the imputation is fit only on training data (pipeline).",
+          "level": "Medium",
+          "tags": ["pandas", "ml"]
+        },
+        {
+          "q": "How do you structure an ML codebase beyond notebooks?",
+          "a": "Keep exploration in notebooks, move stable logic into modules (data/features/train/eval), use config-driven runs, persist artifacts (models/metrics), and add a clear entry point for training and inference.",
+          "level": "Medium",
+          "tags": ["engineering"]
+        },
+        {
+          "q": "What is a Python generator and when do you use it?",
+          "a": "A generator yields values lazily, enabling memory-efficient iteration over large sequences or streams. Use for large data processing, pipelines, and when you don’t need all values at once.",
+          "level": "Easy",
+          "tags": ["python"]
+        }
+      ]
+    },
+    {
+      "id": "rag",
+      "title": "RAG Systems",
+      "desc": "Retrieval-Augmented Generation: chunking, embeddings, retrieval, re-ranking, and evaluation.",
+      "tags": ["RAG", "embeddings", "vector db", "evaluation", "prompting"],
+      "questions": [
+        {
+          "q": "What is RAG and when would you use it instead of fine-tuning?",
+          "a": "RAG retrieves relevant context from a knowledge base and conditions the LLM on it. Use it when knowledge changes frequently, you need citations/auditability, or you want cheaper updates by re-indexing rather than retraining.",
+          "level": "Easy",
+          "tags": ["foundations"]
+        },
+        {
+          "q": "What are the main components of a RAG pipeline?",
+          "a": "Ingestion/cleaning → chunking + metadata → embeddings → vector index → retrieval (top-k) → optional re-ranking → prompt construction → generation → logging/evaluation.",
+          "level": "Easy",
+          "tags": ["architecture"]
+        },
+        {
+          "q": "How do you choose chunk size and overlap?",
+          "a": "Start with structure-aware chunking. Typical ranges: 300–800 tokens with 10–20% overlap, then tune based on doc type and retrieval metrics. Too small loses context; too large hurts precision and context window.",
+          "level": "Medium",
+          "tags": ["chunking"]
+        },
+        {
+          "q": "What retrieval metrics would you track for RAG?",
+          "a": "Hit-rate@k (does a relevant chunk appear in top-k), MRR, nDCG, plus human relevance judgments when possible. Ultimately tie to end-user success metrics and groundedness of final answers.",
+          "level": "Medium",
+          "tags": ["evaluation"]
+        },
+        {
+          "q": "What is re-ranking and why does it help?",
+          "a": "Re-ranking is a second stage that scores retrieved candidates using a stronger model (e.g., cross-encoder) to pick the most relevant chunks. It reduces ‘nearby but wrong’ retrieval errors and improves answer grounding.",
+          "level": "Medium",
+          "tags": ["search"]
+        },
+        {
+          "q": "How do you reduce hallucinations in a RAG app?",
+          "a": "Improve retrieval quality, enforce citation requirements, use grounded prompting (answer only from sources), add refusal behavior when sources are insufficient, and evaluate groundedness/faithfulness with test sets.",
+          "level": "Medium",
+          "tags": ["prompting", "evaluation"]
+        }
+      ]
+    },
+    {
+      "id": "agents",
+      "title": "AI Agents & Tool Calling",
+      "desc": "Agent loops, tool schemas, reliability, safety, and memory.",
+      "tags": ["agents", "tools", "safety", "memory", "logging"],
+      "questions": [
+        {
+          "q": "What is an AI agent?",
+          "a": "An agent is a system that uses a model to plan and take actions via tools in a loop (plan → act → observe → refine) to achieve a goal, often with memory and guardrails.",
+          "level": "Easy",
+          "tags": ["foundations"]
+        },
+        {
+          "q": "What are the common failure modes of agents?",
+          "a": "Tool misuse, hallucinated tool inputs, poor planning, infinite loops, stale memory, permission mistakes, and lack of validation. Mitigate with schemas, validators, timeouts, budgets, and human approval for risky actions.",
+          "level": "Medium",
+          "tags": ["reliability"]
+        },
+        {
+          "q": "How do you design tool schemas for tool calling?",
+          "a": "Define explicit required fields, types, constraints, and examples. Validate inputs/outputs, handle errors explicitly, and keep tools idempotent where possible to support retries safely.",
+          "level": "Medium",
+          "tags": ["tools"]
+        },
+        {
+          "q": "What is human-in-the-loop and when do you need it?",
+          "a": "Human-in-the-loop requires user approval or review before sensitive actions. Use it when actions are irreversible, high-impact (payments/emails/deletes), or when confidence is low.",
+          "level": "Easy",
+          "tags": ["safety"]
+        },
+        {
+          "q": "How would you implement memory for an agent?",
+          "a": "Use short-term context for the active task and long-term memory for stable facts/preferences. Store summarized, redacted memories; retrieve via keyword or vector search; add TTL/forget features to reduce risk.",
+          "level": "Medium",
+          "tags": ["memory", "privacy"]
+        }
+      ]
+    },
+    {
+      "id": "dsa",
+      "title": "DSA Interview Patterns",
+      "desc": "Big-O, common patterns, and how to explain invariants and trade-offs.",
+      "tags": ["DSA", "Big-O", "patterns", "interviews"],
+      "questions": [
+        {
+          "q": "Explain Big-O time complexity in simple terms.",
+          "a": "Big-O describes how runtime grows with input size n, focusing on the dominant term and ignoring constants. It helps compare scalability as n becomes large.",
+          "level": "Easy",
+          "tags": ["big-o"]
+        },
+        {
+          "q": "When do you use a HashMap in interview problems?",
+          "a": "When you need fast membership checks, frequency counts, or tracking indices/seen items. It often turns O(n^2) nested loops into O(n) with O(n) extra space.",
+          "level": "Easy",
+          "tags": ["hashmap"]
+        },
+        {
+          "q": "What is the sliding window pattern?",
+          "a": "Maintain a window over the array/string and update state incrementally as you expand/shrink boundaries. It optimizes many subarray/substring problems from O(n^2) to O(n).",
+          "level": "Medium",
+          "tags": ["sliding-window"]
+        },
+        {
+          "q": "What does it mean to define an invariant in an algorithm?",
+          "a": "An invariant is a condition that remains true throughout the algorithm. In interviews, stating the invariant clarifies why pointer moves or state updates are correct.",
+          "level": "Medium",
+          "tags": ["reasoning"]
+        },
+        {
+          "q": "Explain binary search on answer.",
+          "a": "Use binary search on a numeric range when a feasibility predicate check(mid) is monotonic (true stays true or false stays false). It finds minimal/maximal feasible value in O(log range) checks.",
+          "level": "Medium",
+          "tags": ["binary-search"]
+        }
+      ]
+    },
+    {
+      "id": "mlops",
+      "title": "MLOps & Production",
+      "desc": "What interviewers look for: reproducibility, monitoring, drift, and operational constraints.",
+      "tags": ["MLOps", "deployment", "monitoring", "drift", "pipelines"],
+      "questions": [
+        {
+          "q": "What would you log in an ML system in production?",
+          "a": "Inputs (with privacy safeguards), predictions, model version, latency, errors, feature stats, and outcome labels when available. Also log data/feature drift metrics and business KPIs tied to the model.",
+          "level": "Medium",
+          "tags": ["monitoring"]
+        },
+        {
+          "q": "How do you monitor drift without labels?",
+          "a": "Track input/feature distributions, embedding drift, and proxy metrics (confidence, rejection rate). Use statistical tests or distance measures and alert on significant deviations.",
+          "level": "Medium",
+          "tags": ["drift"]
+        },
+        {
+          "q": "What is model versioning and why is it important?",
+          "a": "Model versioning tracks the exact model artifact, training data reference, code commit, and config. It enables reproducibility, rollbacks, auditing, and reliable comparisons across experiments.",
+          "level": "Easy",
+          "tags": ["reproducibility"]
+        },
+        {
+          "q": "How do you handle latency and cost constraints for LLM/RAG systems?",
+          "a": "Reduce retrieval candidates, use caching, shorten prompts, set token budgets, choose smaller models when possible, batch requests, and monitor cost per request with latency SLOs.",
+          "level": "Medium",
+          "tags": ["llm", "rag"]
+        }
+      ]
+    },
+    {
+      "id": "javascript-core",
+      "title": "JavaScript Core",
+      "desc": "Core JavaScript interview prep for modern frontend/backend work.",
+      "tags": ["JavaScript", "ES6", "async", "web"],
+      "questions": [
+        { "q": "What is the difference between var, let, and const?", "a": "var is function-scoped and hoisted with undefined initialization; let/const are block-scoped and in temporal dead zone before declaration. const prevents reassignment of binding, not deep object mutation.", "level": "Easy", "tags": ["scope"] },
+        { "q": "Explain closures with a practical use case.", "a": "A closure is a function that remembers variables from its lexical scope even after outer execution ends. Common uses: data privacy, function factories, memoization, and event handlers.", "level": "Easy", "tags": ["functions"] },
+        { "q": "What is event loop in JavaScript?", "a": "The event loop coordinates call stack, Web APIs/Node APIs, task queue, and microtask queue. Microtasks (Promises) run before next macrotask (setTimeout/callback queue).", "level": "Medium", "tags": ["async"] },
+        { "q": "Difference between == and ===?", "a": "== allows type coercion before comparison; === compares both value and type strictly. Prefer === to avoid implicit coercion bugs.", "level": "Easy", "tags": ["basics"] },
+        { "q": "What are promises and async/await?", "a": "Promises represent eventual completion/failure of async operations. async/await is syntax over promises that makes asynchronous code look sequential with try/catch handling.", "level": "Easy", "tags": ["async"] },
+        { "q": "How does this keyword work in JS?", "a": "this depends on call-site: global/default, implicit object call, explicit bind/call/apply, constructor new, and lexical this in arrow functions.", "level": "Medium", "tags": ["oop"] },
+        { "q": "What is debouncing vs throttling?", "a": "Debounce delays execution until events stop firing; throttle limits execution to at most once per interval. Useful for search input, resize, and scroll handlers.", "level": "Medium", "tags": ["performance"] },
+        { "q": "Explain prototypal inheritance.", "a": "Objects inherit from other objects via prototype chain. Property lookup traverses chain until found or null. class syntax is sugar on top of prototypes.", "level": "Medium", "tags": ["oop"] },
+        { "q": "What is immutability and why useful in JS apps?", "a": "Immutability avoids in-place mutations, making state transitions predictable and easier to debug/test. It helps React change detection and time-travel debugging patterns.", "level": "Medium", "tags": ["state"] },
+        { "q": "How would you optimize a large JS bundle?", "a": "Use code splitting, tree shaking, lazy loading, modern targets, remove dead dependencies, compress assets, and monitor bundle analyzer metrics.", "level": "Medium", "tags": ["performance"] }
+      ]
+    },
+    {
+      "id": "react",
+      "title": "React",
+      "desc": "React interview questions from hooks to performance and architecture.",
+      "tags": ["React", "hooks", "frontend", "state"],
+      "questions": [
+        { "q": "What is virtual DOM and why React uses it?", "a": "Virtual DOM is an in-memory representation of UI. React diffs virtual trees and applies minimal real DOM updates, improving developer model and update efficiency.", "level": "Easy", "tags": ["rendering"] },
+        { "q": "Explain useState and useEffect differences.", "a": "useState manages local state; useEffect handles side effects after render (fetching, subscriptions, timers). Dependencies control when effect re-runs.", "level": "Easy", "tags": ["hooks"] },
+        { "q": "When do you use useMemo/useCallback?", "a": "Use for memoizing expensive values/functions to reduce re-renders when prop identity matters. Avoid premature usage; measure first.", "level": "Medium", "tags": ["performance"] },
+        { "q": "What causes unnecessary re-renders in React?", "a": "Parent updates, unstable prop references, context updates, and state changes. Fix with component boundaries, memoization, and normalized state.", "level": "Medium", "tags": ["performance"] },
+        { "q": "How do you manage global state in React apps?", "a": "Choose based on complexity: Context for light shared state; Redux/Zustand/Jotai for larger state with devtools, middleware, and predictable updates.", "level": "Medium", "tags": ["state"] },
+        { "q": "What is key prop and why important in list rendering?", "a": "key uniquely identifies list items across renders so React can reconcile correctly. Poor keys cause incorrect state reuse and UI bugs.", "level": "Easy", "tags": ["rendering"] },
+        { "q": "How do you handle forms in React?", "a": "Use controlled inputs for predictable state, validation, and submission flow. For large forms, use libraries like React Hook Form for performance and DX.", "level": "Easy", "tags": ["forms"] },
+        { "q": "What is React Suspense used for?", "a": "Suspense coordinates async rendering boundaries for lazy components/data fetching patterns, enabling fallback UIs and smoother loading states.", "level": "Medium", "tags": ["async"] },
+        { "q": "How do you optimize React app performance?", "a": "Split bundles, memoize carefully, virtualize long lists, avoid heavy work in render, cache requests, and profile with React DevTools profiler.", "level": "Medium", "tags": ["performance"] },
+        { "q": "How do you structure a scalable React project?", "a": "Use feature-based folders, shared UI components, typed APIs, hooks for logic reuse, clear state boundaries, and test strategy for key flows.", "level": "Medium", "tags": ["architecture"] }
+      ]
+    },
+    {
+      "id": "nodejs",
+      "title": "Node.js",
+      "desc": "Backend interview questions for Node.js runtime, APIs, and scalability.",
+      "tags": ["Node.js", "backend", "api", "performance"],
+      "questions": [
+        { "q": "How is Node.js non-blocking?", "a": "Node uses single-threaded event loop with asynchronous I/O offloaded to system/libuv thread pool, allowing many concurrent I/O tasks.", "level": "Easy", "tags": ["runtime"] },
+        { "q": "Difference between process.nextTick and setImmediate?", "a": "process.nextTick queues microtasks before I/O events; setImmediate schedules callback in check phase after I/O callbacks.", "level": "Medium", "tags": ["event-loop"] },
+        { "q": "How do you handle errors in async Node code?", "a": "Use try/catch with async-await, centralized error middleware in Express, structured error objects, and avoid unhandled promise rejections.", "level": "Easy", "tags": ["error-handling"] },
+        { "q": "What is middleware in Express?", "a": "Middleware functions run in request-response cycle for parsing, auth, logging, validation, and error handling before/after route handlers.", "level": "Easy", "tags": ["express"] },
+        { "q": "How do you secure Node APIs?", "a": "Validate input, sanitize output, use helmet/CORS rules, rate limiting, auth + RBAC, secret management, secure cookies/tokens, and audit dependencies.", "level": "Medium", "tags": ["security"] },
+        { "q": "How do streams help in Node.js?", "a": "Streams process data in chunks without loading full payload into memory, ideal for large file processing and efficient network responses.", "level": "Medium", "tags": ["streams"] },
+        { "q": "How do you scale a Node application?", "a": "Use clustering/PM2, horizontal scaling, stateless services, queue-based async workloads, caching, and DB indexing/connection pooling.", "level": "Medium", "tags": ["scaling"] },
+        { "q": "What is the role of package-lock.json?", "a": "It pins exact dependency versions for reproducible installs, reducing surprises across environments and CI pipelines.", "level": "Easy", "tags": ["npm"] },
+        { "q": "How do you test Node APIs?", "a": "Use unit tests for logic, integration tests for routes + DB contracts, mocks/stubs for external services, and run in CI with coverage thresholds.", "level": "Medium", "tags": ["testing"] },
+        { "q": "How do you monitor Node production services?", "a": "Collect logs, metrics, traces, error rates, latency percentiles, and resource usage. Add alerts and dashboards tied to SLOs.", "level": "Medium", "tags": ["observability"] }
+      ]
+    },
+    {
+      "id": "java-spring",
+      "title": "Java + Spring Boot",
+      "desc": "Common Java and Spring Boot interview questions for enterprise backend roles.",
+      "tags": ["Java", "Spring", "backend", "microservices"],
+      "questions": [
+        { "q": "Difference between JDK, JRE, and JVM?", "a": "JVM executes bytecode, JRE provides runtime libraries + JVM, JDK includes JRE plus development tools like javac and debugger.", "level": "Easy", "tags": ["java-basics"] },
+        { "q": "What is dependency injection in Spring?", "a": "DI lets Spring container provide required dependencies to classes, improving decoupling, testability, and maintainability.", "level": "Easy", "tags": ["spring-core"] },
+        { "q": "Difference between @Component, @Service, and @Repository?", "a": "All are stereotype annotations for bean registration; @Service marks business layer, @Repository adds persistence exception translation.", "level": "Easy", "tags": ["spring-core"] },
+        { "q": "How does @Transactional work?", "a": "It creates transactional boundaries via proxies; commit on success, rollback on runtime exceptions (configurable), ensuring consistency.", "level": "Medium", "tags": ["transactions"] },
+        { "q": "What is Spring Boot auto-configuration?", "a": "Spring Boot configures beans automatically based on classpath and properties, reducing boilerplate while allowing overrides.", "level": "Easy", "tags": ["spring-boot"] },
+        { "q": "How do you secure Spring Boot APIs?", "a": "Use Spring Security with JWT/OAuth2, method-level authorization, password hashing, CORS rules, and secure headers.", "level": "Medium", "tags": ["security"] },
+        { "q": "How do you handle exceptions globally in Spring?", "a": "Use @ControllerAdvice and @ExceptionHandler to map exceptions into consistent API error responses.", "level": "Easy", "tags": ["api"] },
+        { "q": "What is difference between Monolith and Microservices?", "a": "Monolith is single deployable with simpler operations; microservices split by bounded context, enabling independent scaling/deployment with higher operational complexity.", "level": "Medium", "tags": ["architecture"] },
+        { "q": "How do you optimize SQL/JPA performance?", "a": "Use proper indexing, avoid N+1 queries, use fetch strategies, pagination, query tuning, and monitor slow query logs.", "level": "Medium", "tags": ["database"] },
+        { "q": "How do you test Spring Boot apps?", "a": "Use unit tests with mocks, slice tests for controllers/repos, and integration tests with Testcontainers for realistic dependencies.", "level": "Medium", "tags": ["testing"] }
+      ]
+    },
+    {
+      "id": "sql-db",
+      "title": "SQL & Databases",
+      "desc": "Interview prep for SQL, indexing, transactions, and data modeling.",
+      "tags": ["SQL", "database", "index", "transactions"],
+      "questions": [
+        { "q": "What is the difference between WHERE and HAVING?", "a": "WHERE filters rows before grouping; HAVING filters groups after aggregation.", "level": "Easy", "tags": ["sql"] },
+        { "q": "What are indexes and when should you use them?", "a": "Indexes speed reads by enabling faster lookups/sorting. Use on frequent filter/join columns, balancing write overhead and storage.", "level": "Easy", "tags": ["indexing"] },
+        { "q": "Explain normalization and denormalization.", "a": "Normalization reduces redundancy and anomalies via structured relations. Denormalization duplicates selected data to improve read performance.", "level": "Medium", "tags": ["modeling"] },
+        { "q": "What is ACID in transactions?", "a": "Atomicity, Consistency, Isolation, Durability guarantee reliable transaction behavior under concurrency and failures.", "level": "Easy", "tags": ["transactions"] },
+        { "q": "What are transaction isolation levels?", "a": "Read Uncommitted, Read Committed, Repeatable Read, Serializable control concurrency anomalies like dirty/non-repeatable/phantom reads.", "level": "Medium", "tags": ["transactions"] },
+        { "q": "How do you diagnose a slow SQL query?", "a": "Use EXPLAIN plans, analyze scans vs index usage, check cardinality estimates, reduce select columns, and optimize joins/predicates.", "level": "Medium", "tags": ["performance"] },
+        { "q": "Difference between INNER JOIN and LEFT JOIN?", "a": "INNER returns matching rows only; LEFT returns all left rows plus matching right rows (null when missing).", "level": "Easy", "tags": ["joins"] },
+        { "q": "What is a composite index?", "a": "Index across multiple columns. Column order matters for query patterns and prefix matching behavior.", "level": "Medium", "tags": ["indexing"] },
+        { "q": "How do you handle pagination efficiently?", "a": "Prefer keyset/cursor pagination for large datasets over OFFSET for better performance and consistency.", "level": "Medium", "tags": ["api"] },
+        { "q": "When to use SQL vs NoSQL?", "a": "Use SQL for structured data, strong consistency, joins/transactions; NoSQL for flexible schema, high-scale specific workloads, and domain-fit access patterns.", "level": "Medium", "tags": ["architecture"] }
+      ]
+    },
+    {
+      "id": "devops-cloud",
+      "title": "DevOps & Cloud",
+      "desc": "Core interview prep for CI/CD, containers, cloud architecture, and reliability.",
+      "tags": ["DevOps", "Cloud", "CI/CD", "Docker", "Kubernetes"],
+      "questions": [
+        { "q": "What is CI/CD and why important?", "a": "CI automates build/test on every change; CD automates delivery/deployment. Together they reduce release risk and improve delivery speed.", "level": "Easy", "tags": ["cicd"] },
+        { "q": "What problem does Docker solve?", "a": "Docker packages app + dependencies into portable containers, ensuring consistent behavior across dev/test/prod environments.", "level": "Easy", "tags": ["docker"] },
+        { "q": "Difference between Docker image and container?", "a": "Image is immutable template; container is a running instance of that image with runtime state.", "level": "Easy", "tags": ["docker"] },
+        { "q": "Why use Kubernetes?", "a": "Kubernetes orchestrates containers: scheduling, scaling, self-healing, service discovery, rolling updates, and config/secret management.", "level": "Medium", "tags": ["kubernetes"] },
+        { "q": "What is Infrastructure as Code?", "a": "IaC defines infrastructure in code (Terraform/CloudFormation), enabling versioning, reproducibility, and automated provisioning.", "level": "Easy", "tags": ["iac"] },
+        { "q": "How do you design high availability in cloud?", "a": "Use multi-AZ architecture, load balancers, stateless services, replicated storage, health checks, and failover strategy.", "level": "Medium", "tags": ["reliability"] },
+        { "q": "What are SLI, SLO, and SLA?", "a": "SLI is measured reliability metric, SLO is target objective, SLA is contractual commitment with consequences.", "level": "Medium", "tags": ["sre"] },
+        { "q": "How do you handle secrets securely?", "a": "Use secret managers, short-lived credentials, rotation, least privilege IAM, encrypted storage, and avoid plain-text secrets in repos/logs.", "level": "Medium", "tags": ["security"] },
+        { "q": "What is blue-green deployment?", "a": "Two identical environments: route traffic to new version (green) after validation, enabling fast rollback to blue if needed.", "level": "Medium", "tags": ["deployment"] },
+        { "q": "How do you monitor cloud-native systems?", "a": "Collect logs, metrics, traces; define alerts by SLO; use dashboards for latency/error/saturation/traffic and incident runbooks.", "level": "Medium", "tags": ["observability"] }
+      ]
+    }
+  ]
+}
+
