@@ -1,43 +1,39 @@
-# Saurav Danej · 30 Days LinkedIn AI/ML Content
+# 30 Days LinkedIn Challenge
 
-This folder contains a small HTML/CSS/JS website that renders:
+## Project Explanation
+The 30 Days LinkedIn Challenge is a coding journey that provides users with daily coding problems to solve, building their skills and preparing them for interviews in just one month. Each problem is aimed at challenging users to think critically and apply their knowledge in practical scenarios.
 
-- 30 daily LinkedIn posts (AI/ML, Python, RAG, DSA, AI automation, AI agents)
-- Flow diagrams (Mermaid)
-- Interview question bank
-- A print-to-PDF view
-- A PNG image generator (LinkedIn-ready templates)
+## Features
+- **Daily Challenges:** New coding problems released every day.
+- **Solution Tracker:** Users can track their progress and solutions.
+- **Discussion Forum:** A platform for users to discuss problems and solutions.
+- **Resources:** Curated learning resources linked to specific problems.
 
-## Run locally
+## Deployment
+To deploy this project locally, ensure you have the following prerequisites installed:
+- Python 3.x
+- Flask
 
-Because the site loads JSON via `fetch`, open it with a local web server (not `file://`).
+Then, follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/SauravDnj/30-Days-LinkedIn.git
+   cd 30-Days-LinkedIn
+   ```
+2. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the application:
+   ```bash
+   python app.py
+   ```
+4. Open your browser and navigate to `http://localhost:5000`
 
-### Option A (Python)
+## Setup Instructions
+1. Ensure Python and Flask are installed.
+2. Create a virtual environment for your Python dependencies (optional but recommended).
+3. Follow the deployment instructions above to get the application running locally.
+4. Begin the 30-day coding challenge by solving the first problem!
 
-```bash
-python -m http.server 5500
-```
-
-Open `http://localhost:5500/`
-
-### Option B (Node)
-
-```bash
-npx serve .
-```
-
-## Files
-
-- `index.html`: Posts browser + diagram preview + copy buttons
-- `pdf.html`: Printable booklet view (use browser Print → Save as PDF)
-- `images.html`: Canvas-based image generator → download PNG
-- `interview.html`: Interview question bank (copy all)
-- `content/posts.json`: 30-day post content (edit this to customize)
-- `content/interview_questions.json`: Interview Q&A bank
-
-## Customize
-
-Update:
-- your name/links in the HTML headers/footers
-- any post text in `content/posts.json` (hook/body/CTA/hashtags)
-
+Feel free to contribute to the project by submitting a pull request!
